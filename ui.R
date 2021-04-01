@@ -1,0 +1,115 @@
+# Read in ui/ files.
+for( i in list.files('ui', pattern = '[.][Rr]', recursive = TRUE, full.names = TRUE ) ) source(i)
+rm(i)
+
+testchoices = c(
+  'Core-based Statistical Area [Household]',
+  'Region [Household]'
+)
+
+# Define UI.
+ui = function(){
+  
+  shinyUI( fluidPage(
+  
+    div(class = 'hide', titlePanel('Census Explorer')),
+    uihead(),
+
+    # highcharts defaults.
+    tags$script("
+      Highcharts.setOptions({
+          chart: { style: { fontFamily: 'Rubik' } },
+          plotOptions: { series: { animation: false } },
+          credits: { style: {fontFamily: 'Open Sans' } },
+          exporting: { enabled: false },
+          lang: { thousandsSep: ',' }
+      });
+    "),
+    useShinyjs(),
+
+    div( style = 'margin-top: 30px; margin-left: 30px;',
+
+      h1(class = 'inline', id = 'bigheader', 'Census Source'),    
+      
+      div(
+        style = 'margin-left: 25px; ',
+        p(class = 'belowheader', 'One stop for easy access to 688 fields across 3 tables from the Social and Economic Supplements.'),
+        uiOutput('selected_fields_show'),
+        div(
+          id = 'previewbutton',
+          class = 'clickable previewdownload',
+          div(class = 'inline', 
+            conditionalPanel('input.toggle_preview % 2 == 1', HTML('<i class="fas fa-chevron-right"></i>')),
+            conditionalPanel('input.toggle_preview % 2 == 0', HTML('<i class="fas fa-chevron-down"></i>'))
+          ),
+          p('Preview', onclick = '$("#toggle_preview")[0].click();')
+        ),
+        div(
+          id = 'downloadbutton',
+          class = 'clickable previewdownload',
+          p('Download', onclick = '$("#trigger_download")[0].click(); ')
+        ),
+        uiOutput('previewtable'),
+        p(class = 'belowheader', style = 'margin-top: 10px; font-size: 12pt; ', 'Choose a table to start:')
+      ),
+
+      div(
+        div(class = 'inline', style = 'max-width: 375px; ',
+          uiOutput('selected_table_show'),
+          uiOutput('selected_topic_show')
+        ),
+        div(class = 'inline', style = 'width: calc(100vw - 450px); ', 
+          uiOutput('choosetable'),
+          uiOutput('cfcat'),
+          uiOutput('table-fields')
+        )
+      )
+
+      #uiOutput('selected_fields_ui'), # no longer using.
+      #uiOutput('pdui'),
+      #uiOutput('c'), # no longer developing the chart.
+      #uiOutput('cfui'),
+
+    ),
+
+    # hidden inputs.
+    div(style = 'visibility: hidden;', 
+      downloadButton('trigger_download'), # won't work in hidden.
+      actionButton('toggle_preview', NULL)
+    ),
+    hidden(
+
+      textInput(inputId = 'tab', label = NULL, value = ''),
+      textInput(inputId = 'add_field', label = NULL, value = ''),      
+      textInput(inputId = 'remove_field', label = NULL, value = ''),
+      textInput('reset_selected_fields', label = NULL, value = ''),
+
+      selectizeInput(inputId = 'selected_topics', label = NULL, choices = c(), multi = FALSE),
+      selectizeInput(inputId = 'table', label = NULL, choices = c('Household', 'Family', 'Person'), multi = TRUE),
+      selectizeInput(
+        inputId = 'selected_fields', label = NULL, multi = TRUE,
+        choices = if(view == 'previewdata') testchoices,
+        selected = if(view == 'previewdata') testchoices
+      )
+      
+    ),
+    div(
+      style = 'position: fixed; top: 0; right: 0; color: White; padding: 10px; ',
+      div(
+        HTML('<i class="fas fa-share" style="transform: rotate(-90deg); "></i>'),
+        p(class = 'inline', style = 'margin-top: 8px; ', 'Bookmark/Share This URL')
+      ),
+      a(
+        style = 'text-decoration: none; color: white; ',
+        href = 'https://github.com/superchordate/census-full', target = '_blank',
+        p(class = 'inline', style = 'margin-top: 8px; ', 'Documentation on '),
+        img(
+          style = 'height: 30px;',
+          src = 'GitHub_Logo_White.png'
+        )
+      )
+    )
+
+  ))
+
+}

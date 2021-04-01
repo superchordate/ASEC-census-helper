@@ -1,0 +1,101 @@
+selected_data = function(){
+
+    #proginit('Select & Summarze')
+    
+    # extract tables and fields.
+    selected_fields = input$selected_fields
+    tables = gsub('^[^[]+[[]([^]]+)[]]$', '\\1', input$selected_fields)
+    fields = trimws(gsub('[[].+$', '', input$selected_fields))
+    proginc()
+
+    # get fields starting with lower level tables first.
+    idt = NULL
+    if('Person' %in% tables){
+        ifields = fields[tables == 'Person']
+        idt = getdata('person')[ , c(ifields, 'PF_SEQ', 'PH_SEQ'), with = FALSE ]
+    }
+    proginc()
+
+    if('Family' %in% tables){
+        ifields = fields[tables == 'Family']
+        if(nanull(idt)){
+            idt = getdata('family')[ , c(ifields, 'FH_SEQ'), with = FALSE ]
+        } else {
+            idt %<>%
+                jrepl(
+                    getdata('family'),
+                    by = c('PF_SEQ' = 'FFPOS', 'PH_SEQ' = 'FH_SEQ'),
+                    replace.cols = c(ifields, 'FH_SEQ')
+                )
+        }     
+    }
+    proginc()
+
+    if('Household' %in% tables){
+        ifields = fields[tables == 'Household']
+        if(nanull(idt)){
+            idt = getdata('household')[ , ifields, with = FALSE ]
+        } else {
+            if('FH_SEQ' %ni% names(idt)) idt$FH_SEQ = idt$PH_SEQ
+            idt %<>%
+                jrepl(
+                    getdata('household'),
+                    by = c('FH_SEQ' = 'H_SEQ'),
+                    replace.cols = ifields
+                )
+        }     
+    }
+    proginc()
+
+    # drop matching columns
+    idt = idt[, setdiff(names(idt), match_keys), with = FALSE]
+    
+    # resort cols to match incoming order.
+    idt = idt[, fields, with = FALSE]
+
+    # set names to include table.
+    names(idt) = cc(fields, ' [', tables, ']')
+    proginc()
+
+    # add na pct to column names and drop NAs
+    #nact = sapply(idt, function(x) mean(is.na(x)))
+    idt = idt[complete.cases(idt), ]
+    #names(idt) = cc(names(idt), cc('(', fmat(1-nact, '%', digits = 0), ')'), sep = ' ')
+    #proginc()
+
+    return(idt)
+
+}
+
+pd_data = function(){ # only used for chart so no reactive needed
+
+    if(input$toggle_preview %% 2 == 0) return(NULL)
+    idt = selected_data()
+
+    # combine non-numeric columns.
+    nonnum = names(idt)[!sapply(idt, is.numeric)]
+    #idt$desc = if(length(nonnum) > 1){
+    #    do.call(cc, c(idt[, nonnum, with = FALSE], sep = '<br>'))
+    #} else {
+    #    idt[, nonnum, with = FALSE]
+    #}
+    proginc()
+
+    # set other, group, and add rows.
+    #idt$desc = fct_lump(idt$desc, n = 10)
+    dofn = function(x) fmat(mean(x))
+    means = idt %>% group_by_at(nonnum) %>% sumnum(do.fun = dofn, na.rm = TRUE)
+    idt %<>% 
+        group_by_at(nonnum) %>% 
+        summarize(rows = n()) %>%
+        arrange(desc(rows)) %>%
+        left_join(means, by = nonnum) %>% 
+        head() %>%
+        mutate(rows = fmat(rows)) %>%
+        rename(Rows = rows)
+
+    proginc()
+
+    return(idt)
+
+}

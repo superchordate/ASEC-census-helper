@@ -1,0 +1,1 @@
+l = function(x) if(islocal) cat(x, '\n')

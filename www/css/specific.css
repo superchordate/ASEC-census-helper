@@ -1,0 +1,74 @@
+/* CSS specific to classes and IDs in this app only. */
+
+/* data preview */
+#table-data-ui {
+    position: fixed; top: 10px; right: 5px; padding: 0;
+}
+#pdchart { height: calc(100vh - 90px); }
+#table-data { 
+    width: 400px; height: 400px; 
+    /*border: 2px solid #a67f78;*/
+    background-color: white;
+    box-shadow: 0px 2px 5px; overflow: auto; padding: 5px;
+}
+#table-data table { border-collapse: collapse; }
+#table-data table th, #table-data table td { border: 1px solid grey; padding: 3px; }
+#table-data table th { font-weight: normal; }
+/*#table-data table tr:nth-child(odd) { background-color: #E1DCD9; }*/
+
+/* intro header */
+#bigheader { font-family: Raleway Dots; color: white; opacity: .7; font-size: 72pt; margin-top: 0; }
+.belowheader { font-family: Work Sans; font-weight: 300; color: white; font-size: 16pt; margin-bottom: 10px; }
+
+/* category list */
+#table-fields-ui { width: calc(100% - 400px); }
+#table-fields-ui > div { min-height: 800px; }
+
+.fieldbox { background-color: white; padding: 5px; margin: 5px; width: 200px; min-height: 125px; }
+.selected { background-color: #78a694; color: white;  }
+
+#downloadData { float: right; margin-top: 10px; }
+
+/* choose table intro */
+#choosetable { margin: 0; padding: 0; animation-delay: 3s;}
+.lifade { display: none; float: left; }
+.lifade > div {
+    display: table; background-color: #b98d72; width: 300px; height: 200px; margin-left: 25px; 
+    text-align: center; font-family: Work Sans; font-size: 30pt; color: white;
+    font-weight: 700; float: left; list-style: none; margin-top: 35px; 
+    text-align: center; 
+}
+.lifade > div > p { opacity: .8; padding: 0; margin: 0 auto; display: table-cell; vertical-align: middle; }
+
+/* subtopic */
+.subtopics > li > div { 
+    font-size: 20pt; width: 250px; height: 130px; padding-top: 0px; 
+    font-weight: 300; background-color: #ae4951;
+}
+
+#fields > li > div {
+    font-size: 16pt; width: 200px; height: 125px; padding-top: 0px; 
+    font-weight: 300; background-color: #161b1f; color: white;
+}
+#fields .small {
+    font-size: 12pt; width: 160px; height: 100px; margin-top: 5px; margin-left: 0; margin-right: 10px; 
+}
+
+.previewdownload { 
+    opacity: .6; color: White; font-family: Work Sans; font-size: 12pt; display: inline-block; 
+    font-weight: 300;
+}
+.previewdownload > p { margin-top: 0px; margin-left: 5px; display: inline-block; }
+.previewdownload > i {  color: White; margin-left: 10px; margin-top: 10px; }
+#downloadbutton { opacity: 1; font-weight: 500; }
+
+/* preview table */
+#previewtable div { 
+    color: White; font-family: Work Sans; font-weight: 300;
+    background: rgba(255, 255, 255, .2); padding: 5px; margin-top: 10px; 
+    display: inline-block; height: 300px; overflow: auto; 
+}
+th { font-weight: 500; max-width: 150px; }
+th, td { padding: 3px; }
+
+.spinEffect { -webkit-animation: spin 0.5s infinite linear; }
