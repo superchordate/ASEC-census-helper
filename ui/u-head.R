@@ -6,7 +6,7 @@ uihead = function(){
 
         # Google fonts. #TODO bring local.        
         HTML('<link rel="preconnect" href="https://fonts.gstatic.com">'),
-        HTML('<link href="https://fonts.googleapis.com/css2?family=Raleway+Dots&family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">')
+        HTML('<link href="https://fonts.googleapis.com/css2?family=Raleway+Dots&family=Work+Sans:wght@300;400;500;700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">')
 
     )
 

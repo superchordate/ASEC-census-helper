@@ -24,4 +24,4 @@ rm(i)
 qload('data/appdata')
 
 # dev views.
-view = 'previewdata' # production, previewdata
+view = 'production' # production, previewdata

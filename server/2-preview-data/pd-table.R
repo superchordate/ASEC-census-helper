@@ -33,3 +33,41 @@ output$previewtable = renderUI({
     if(!is.null(idt)) div(tablehtml(idt)) 
 })
 #output$pd_narows = renderUI(p(fmat(pd_data()[[1]]$narows), ' rows have missing values.'))
+
+output$previewdownload = renderUI({ 
+
+    if(nanull(input$selected_fields)) return(
+        p(
+            class = 'belowheader', 
+            style = 'margin-top: 10px; font-size: 12pt; ', 
+            'Choose a table to start:'
+        )
+    )
+    
+    div(
+        div(
+            id = 'previewbutton',
+            class = 'clickable previewdownload',
+            div(
+                class = 'inline rotate',
+                id = 'previewchevron', 
+                HTML('<i class="fas fa-chevron-right"></i>')
+            ),
+            p(
+                'Preview', 
+                onclick = '
+                $("#previewchevron").toggleClass("down");
+                $("#previewbutton p").toggleClass("bold");
+                $("#toggle_preview")[0].click();
+            '
+            ),
+            div(
+                id = 'downloadbutton',
+                class = 'clickable previewdownload',
+                p('Download', onclick = '$("#trigger_download")[0].click(); ')
+            )
+        ),
+        uiOutput('previewtable')
+    )
+    
+})

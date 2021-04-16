@@ -2,7 +2,9 @@
 server = function(input, output, session) {
   
   # run files in server/ folder.
-  for(i in list.files('server', pattern = '[.][Rr]', recursive = TRUE, full.names = TRUE )) source( i, local = TRUE )
+  dofiles = list.files('server', pattern = '[.][Rr]', recursive = TRUE, full.names = TRUE )
+  dofiles = dofiles[order(grepl('/[^.]+/', dofiles))] # put source/ home files first.
+  for(i in dofiles) source( i, local = TRUE )
   rm(i)
    
 }

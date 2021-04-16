@@ -5,7 +5,8 @@ selected_data = function(){
     # extract tables and fields.
     selected_fields = input$selected_fields
     tables = gsub('^[^[]+[[]([^]]+)[]]$', '\\1', input$selected_fields)
-    fields = trimws(gsub('[[].+$', '', input$selected_fields))
+    descs = trimws(gsub('[[].+$', '', input$selected_fields))
+    fields = sapply(descs, function(desc) fields$field[fields$desc == desc][1])
     proginc()
 
     # get fields starting with lower level tables first.
@@ -54,7 +55,7 @@ selected_data = function(){
     idt = idt[, fields, with = FALSE]
 
     # set names to include table.
-    names(idt) = cc(fields, ' [', tables, ']')
+    names(idt) = cc(toupper(descs), ' [', tables, ']')
     proginc()
 
     # add na pct to column names and drop NAs
@@ -81,20 +82,43 @@ pd_data = function(){ # only used for chart so no reactive needed
     #}
     proginc()
 
-    # set other, group, and add rows.
-    #idt$desc = fct_lump(idt$desc, n = 10)
-    dofn = function(x) fmat(mean(x))
-    means = idt %>% group_by_at(nonnum) %>% sumnum(do.fun = dofn, na.rm = TRUE)
+    # get means.
+    dofn = function(x) fmat(mean(x, na.rm = TRUE))
+    totalrows = nrow(idt)
+    means = idt %>% group_by_at(nonnum) %>% sumnum(do.fun = dofn)
+    
+    # add mean names.
+    ismean = names(means) %ni% nonnum
+    names(means)[ismean] = cc('Mean: ', names(means)[ismean])
+    
     idt %<>% 
         group_by_at(nonnum) %>% 
-        summarize(rows = n()) %>%
+        summarize(rows = n(), .groups = 'drop') %>%
         arrange(desc(rows)) %>%
         left_join(means, by = nonnum) %>% 
-        head() %>%
+        head()
+
+    if(sum(idt$rows) < totalrows){
+
+        other = data.frame(
+            col1 = 'Other', 
+            rows = totalrows - sum(idt$rows),
+            stringsAsFactors = FALSE
+        )
+
+        names(other)[1] = names(idt)[1]
+
+        idt %<>% bind_rows(other)
+
+    }
+
+    proginc()
+
+    idt %<>% 
         mutate(rows = fmat(rows)) %>%
         rename(Rows = rows)
 
-    proginc()
+    idt[is.na(idt)] <- ''
 
     return(idt)
 

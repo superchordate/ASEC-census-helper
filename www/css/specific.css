@@ -64,11 +64,32 @@
 
 /* preview table */
 #previewtable div { 
-    color: White; font-family: Work Sans; font-weight: 300;
-    background: rgba(255, 255, 255, .2); padding: 5px; margin-top: 10px; 
-    display: inline-block; height: 300px; overflow: auto; 
+    color: white; font-family: Lato; font-weight: 400;
+    opacity: 0.8;
+    font-size: 12pt; 
+    background: rgba(255, 255, 255, .3);
+    padding: 0; margin-top: 10px; 
+    display: inline-block; max-height: 300px; overflow: auto; 
+    max-width: 100%;
 }
-th { font-weight: 500; max-width: 150px; }
+table { border-collapse: none; margin: 0; }
+tr { border: 1px solid white; margin: 5px; }
+th { font-weight: 700; max-width: 150px; }
 th, td { padding: 3px; }
 
-.spinEffect { -webkit-animation: spin 0.5s infinite linear; }
+/* rotate chevron */
+.rotate{
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.rotate.down{
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+#previewbutton p.bold { opacity: 1; font-weight: 500; }
+
+#selected_fields_show > div > p { color: White; opacity: 0.5; }

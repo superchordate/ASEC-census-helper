@@ -18,7 +18,6 @@ https://www.sessions.edu/color-calculator/
     color: #2e1e11;
 }
 
-/* currenlty using: */
 .comfynuetral{
     color: #E1DCD9;
     color: #8f8981;
@@ -38,6 +37,7 @@ body {
     color: #222;;
     background-color: #572331;
     font-size: 10pt; 
+    max-width: 100vw;
 }
 .border-white { border: 3px solid white; padding: 5px; margin-bottom: 5px; }
 .border-medium { border: 2px solid #a67f78; }

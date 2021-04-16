@@ -14,11 +14,16 @@ subtopic_squares = function(subtopics){
         class = 'subtopics',
         lapply(subtopics, function(subtopic) tags$li(class = 'lifade', div(
             class = 'clickable',
+            style = 'position: relative; ',
             onclick = if(dynamic){
                 cc("$('.subtopics li').fadeOut(100, function(){ Shiny.onInputChange('selected_topics', '", subtopic, "'); })")
             } else {
                 "Shiny.onInputChange('selected_topics', '');"
             },
+            if(length(subtopics) == 1) div(
+                style = 'position: absolute; top: 0px; left: 0px; font-size: 14pt; padding: 5px; padding-left: 10px; ',
+                HTML('<i class="fas fa-window-close"></i>')
+            ),
             p(subtopic)
         ))),
         # fade options in.
@@ -50,7 +55,7 @@ tablefields = reactive({
             subtopic != 'Match Keys'
         ) %>%
         select(
-            recordtype, topic, subtopic, field, sample
+            recordtype, topic, subtopic, field, desc, sample
         )
 })
 
@@ -91,22 +96,26 @@ output[['table-fields']] = renderUI({ if(isval(input$table) && isval(input$selec
     #proginit('Get Fields')
 
     selected = gsub(' \\[[^]]+]', '', isolate(input$selected_fields))
-    ifields = topicfields() %>% filter(subtopic == input$selected_topics, field %ni% selected)
+    ifields = topicfields() %>% filter(subtopic == input$selected_topics, desc %ni% selected)
     if(is.null(ifields) || nrow(ifields) == 0) return(NULL)
 
     #ifields = ifields %>% select(recordtype, subtopic, field) %>% distinct(
-    ifields$selection_label = cc(ifields$field, ' [', ifields$recordtype, ']')
+    ifields$selection_label = cc(ifields$desc, ' [', ifields$recordtype, ']')
     ifields$selected = ifields$selection_label %in% input$selected_fields
     
-    ifields %<>% select(field, selection_label) %>% distinct()
+    ifields %<>% select(desc, selection_label) %>% distinct()
     
-    fields_ul(fields = ifields$field, labels = ifields$selection_label)
+    fields_ul(fields = ifields$desc, labels = ifields$selection_label)
     
 }})
 
 output$selected_fields_show = renderUI({
     if(nanull(input$selected_fields)) return(div())
-    fields_ul(input$selected_fields, dynamic = FALSE)
+    div(
+        style = 'margin-bottom: 10px; ', 
+        p('Selected Fields: '),
+        fields_ul(input$selected_fields, dynamic = FALSE)
+    )
 })
 
 observe(if(isval(input$add_field) && input$add_field != 'clear'){

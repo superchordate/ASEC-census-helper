@@ -16,15 +16,6 @@ ui = function(){
     uihead(),
 
     # highcharts defaults.
-    tags$script("
-      Highcharts.setOptions({
-          chart: { style: { fontFamily: 'Rubik' } },
-          plotOptions: { series: { animation: false } },
-          credits: { style: {fontFamily: 'Open Sans' } },
-          exporting: { enabled: false },
-          lang: { thousandsSep: ',' }
-      });
-    "),
     useShinyjs(),
 
     div( style = 'margin-top: 30px; margin-left: 30px;',
@@ -35,22 +26,7 @@ ui = function(){
         style = 'margin-left: 25px; ',
         p(class = 'belowheader', 'One stop for easy access to 688 fields across 3 tables from the Social and Economic Supplements.'),
         uiOutput('selected_fields_show'),
-        div(
-          id = 'previewbutton',
-          class = 'clickable previewdownload',
-          div(class = 'inline', 
-            conditionalPanel('input.toggle_preview % 2 == 1', HTML('<i class="fas fa-chevron-right"></i>')),
-            conditionalPanel('input.toggle_preview % 2 == 0', HTML('<i class="fas fa-chevron-down"></i>'))
-          ),
-          p('Preview', onclick = '$("#toggle_preview")[0].click();')
-        ),
-        div(
-          id = 'downloadbutton',
-          class = 'clickable previewdownload',
-          p('Download', onclick = '$("#trigger_download")[0].click(); ')
-        ),
-        uiOutput('previewtable'),
-        p(class = 'belowheader', style = 'margin-top: 10px; font-size: 12pt; ', 'Choose a table to start:')
+        uiOutput('previewdownload')
       ),
 
       div(
@@ -94,17 +70,18 @@ ui = function(){
       
     ),
     div(
-      style = 'position: fixed; top: 0; right: 0; color: White; padding: 10px; ',
+      style = 'position: absolute; top: 0; right: 0; color: White; padding: 10px; ',
       div(
         HTML('<i class="fas fa-share" style="transform: rotate(-90deg); "></i>'),
         p(class = 'inline', style = 'margin-top: 8px; ', 'Bookmark/Share This URL')
       ),
       a(
-        style = 'text-decoration: none; color: white; ',
-        href = 'https://github.com/superchordate/census-full', target = '_blank',
-        p(class = 'inline', style = 'margin-top: 8px; ', 'Documentation on '),
+        class = 'clickable',
+        style = 'text-decoration: none; color: white; float: right;',
+        href = 'https://github.com/superchordate/census-source', target = '_blank',
+        p(class = 'inline', style = 'margin-top: 5px; ', 'Guide on '),
         img(
-          style = 'height: 30px;',
+          style = 'height: 25px;',
           src = 'GitHub_Logo_White.png'
         )
       )
