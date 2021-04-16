@@ -7,10 +7,13 @@ How to get the most out of Census Source:
 
 1. Click around to find and **select data fields**.
 2. **Preview** data in the app.
-3. **Download** your data in CSV format. CS will find your data and perform necessary joins so you get a single, ready-to-use ASEC datset.
+3. **Download** your data in CSV format. CS will find your data and perform necessary joins so you get a single, ready-to-use ASEC dataset.
 4. Plop your data into Power BI or Tableau to **continue exploring**!
 
 *Pro Tip: **Bookmark** or **Share** the URL to select the same fields again later.* 
+
+* Previews are grouped, but downloads will give you data that is not summarized.
+* Downloads will include relevant record keys to connect observations over time (longitudinal).
 
 # Why Census Source?
 
