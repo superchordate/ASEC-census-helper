@@ -1,5 +1,5 @@
 setBookmarkExclude(c(
-    'remove_field', 'reset_selected_fields', 'add_field', 'selected_topics', 'table', 'tab',
+    'remove_field', 'reset_selected_fields', 'add_field', 'selected_topics', 'table', 'tab', 'toggle_preview',
     # table parts.
     sapply(c(
         'table-data'
@@ -7,8 +7,9 @@ setBookmarkExclude(c(
     )
 ))
 
-observe({    
-    reactiveValuesToList(input) # creates reactivity to all inputs.
+observe({
+    input$selected_fields # only bookmark selected_fields
+    #reactiveValuesToList(input) # creates reactivity to all inputs.
     session$doBookmark()
 })
 
@@ -16,4 +17,7 @@ onBookmarked(function(url) {
     updateQueryString(gsub('&[^=]+=null', '', url))
 })
 
-#TODO get bookmarks to load.
+onRestore(function(state) {
+    selected_fields = state$input$selected_fields
+    if(!is.null(selected_fields)) updateSelectizeInput(session, 'selected_fields', choices = selected_fields, selected = selected_fields)
+})

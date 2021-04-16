@@ -7,25 +7,26 @@ selected_data = function(){
     tables = gsub('^[^[]+[[]([^]]+)[]]$', '\\1', input$selected_fields)
     descs = trimws(gsub('[[].+$', '', input$selected_fields))
     fields = sapply(descs, function(desc) fields$field[fields$desc == desc][1])
+    names(fields) = NULL
     proginc()
 
     # get fields starting with lower level tables first.
     idt = NULL
     if('Person' %in% tables){
         ifields = fields[tables == 'Person']
-        idt = getdata('person')[ , c(ifields, 'PF_SEQ', 'PH_SEQ'), with = FALSE ]
+        idt = getdata('person')[ , unique(c(ifields, 'PF_SEQ', 'PH_SEQ', 'FILEDATE')), with = FALSE ]
     }
     proginc()
 
     if('Family' %in% tables){
         ifields = fields[tables == 'Family']
         if(nanull(idt)){
-            idt = getdata('family')[ , c(ifields, 'FH_SEQ'), with = FALSE ]
+            idt = getdata('family')[ , unique(c(ifields, 'FH_SEQ', 'FFPOS', 'FILEDATE')), with = FALSE ]
         } else {
             idt %<>%
                 jrepl(
                     getdata('family'),
-                    by = c('PF_SEQ' = 'FFPOS', 'PH_SEQ' = 'FH_SEQ'),
+                    by = c('PF_SEQ' = 'FFPOS', 'PH_SEQ' = 'FH_SEQ', 'FILEDATE' = 'FILEDATE'),
                     replace.cols = c(ifields, 'FH_SEQ')
                 )
         }     
@@ -35,27 +36,24 @@ selected_data = function(){
     if('Household' %in% tables){
         ifields = fields[tables == 'Household']
         if(nanull(idt)){
-            idt = getdata('household')[ , ifields, with = FALSE ]
+            idt = getdata('household')[ , unique(c(ifields, 'H_SEQ', 'FILEDATE')), with = FALSE ]
         } else {
             if('FH_SEQ' %ni% names(idt)) idt$FH_SEQ = idt$PH_SEQ
             idt %<>%
                 jrepl(
                     getdata('household'),
-                    by = c('FH_SEQ' = 'H_SEQ'),
+                    by = c('FH_SEQ' = 'H_SEQ', 'FILEDATE' = 'FILEDATE'),
                     replace.cols = ifields
                 )
         }     
     }
     proginc()
-
-    # drop matching columns
-    idt = idt[, setdiff(names(idt), match_keys), with = FALSE]
     
     # resort cols to match incoming order.
-    idt = idt[, fields, with = FALSE]
+    idt = idt[, intersect(c(fields, match_keys), names(idt)), with = FALSE]
 
     # set names to include table.
-    names(idt) = cc(toupper(descs), ' [', tables, ']')
+    names(idt)[names(idt) %in% fields] = cc(toupper(descs), ' [', tables, ']')
     proginc()
 
     # add na pct to column names and drop NAs
@@ -81,6 +79,9 @@ pd_data = function(){ # only used for chart so no reactive needed
     #    idt[, nonnum, with = FALSE]
     #}
     proginc()
+
+    # drop keys for preview. 
+    idt = idt[, setdiff(names(idt), match_keys), with = FALSE]
 
     # get means.
     dofn = function(x) fmat(mean(x, na.rm = TRUE))
