@@ -1,6 +1,5 @@
 require(easyr)
 require(shiny)
-require(hcslim) # devtools::install_github( "superchordate/hcslim" )
 require(data.table)
 require(forcats)
 require(glue)
