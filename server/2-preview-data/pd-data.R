@@ -14,18 +14,20 @@ selected_data = function(){
     idt = NULL
     if('Person' %in% tables){
         ifields = fields[tables == 'Person']
-        idt = getdata('person')[ , unique(c(ifields, 'PF_SEQ', 'PH_SEQ', 'FILEDATE')), with = FALSE ]
+        getfields = unique(c(ifields, 'PF_SEQ', 'PH_SEQ', 'FILEDATE'))
+        idt = getdata('person')[ , getfields, with = FALSE ]
     }
     proginc()
 
     if('Family' %in% tables){
         ifields = fields[tables == 'Family']
+        getfields = unique(c(ifields, 'FH_SEQ', 'FFPOS', 'FILEDATE'))
         if(nanull(idt)){
-            idt = getdata('family')[ , unique(c(ifields, 'FH_SEQ', 'FFPOS', 'FILEDATE')), with = FALSE ]
+            idt = getdata('family')[, getfields, with = FALSE ]
         } else {
             idt %<>%
                 jrepl(
-                    getdata('family'),
+                    getdata('family')[,getfields, with = FALSE],
                     by = c('PF_SEQ' = 'FFPOS', 'PH_SEQ' = 'FH_SEQ', 'FILEDATE' = 'FILEDATE'),
                     replace.cols = c(ifields, 'FH_SEQ')
                 )
@@ -35,13 +37,14 @@ selected_data = function(){
 
     if('Household' %in% tables){
         ifields = fields[tables == 'Household']
+        getfields = unique(c(ifields, 'H_SEQ', 'FILEDATE'))
         if(nanull(idt)){
-            idt = getdata('household')[ , unique(c(ifields, 'H_SEQ', 'FILEDATE')), with = FALSE ]
+            idt = getdata('household')[ , getfields, with = FALSE ]
         } else {
             if('FH_SEQ' %ni% names(idt)) idt$FH_SEQ = idt$PH_SEQ
             idt %<>%
                 jrepl(
-                    getdata('household'),
+                    getdata('household')[,getfields, with = FALSE],
                     by = c('FH_SEQ' = 'H_SEQ', 'FILEDATE' = 'FILEDATE'),
                     replace.cols = ifields
                 )
