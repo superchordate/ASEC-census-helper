@@ -12,7 +12,7 @@ ui = function(){
   
   shinyUI( fluidPage(
   
-    div(class = 'hide', titlePanel('Census Explorer')),
+    div(class = 'hide', titlePanel('Census Source')),
     uihead(),
 
     # highcharts defaults.
