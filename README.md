@@ -1,6 +1,8 @@
 # census-source
 One stop for easy access to 700 fields across 3 tables from the [Social and Economic Supplements](https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html) to the Current Population Survey.
 
+*Census source is in development. Some of the value mappings are not complete. More to come!*
+
 # Quickstart
 
 How to get the most out of Census Source:
