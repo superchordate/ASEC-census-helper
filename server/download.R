@@ -4,6 +4,8 @@ output$trigger_download = downloadHandler(
     },
     content = function(file) {
         idt = selected_data()
+        proginc('Prep Download')
         write.csv(idt, file, row.names = FALSE)
+        progclose()
     }
 )

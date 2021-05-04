@@ -1,5 +1,5 @@
 # census-source
-One stop for easy access to 688 fields across 3 tables from the [Social and Economic Supplements](https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html) to the Current Population Survey.
+One stop for easy access to 700 fields across 3 tables from the [Social and Economic Supplements](https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html) to the Current Population Survey.
 
 # Quickstart
 
@@ -45,5 +45,6 @@ Here are some links if you'd like to learn more about this dataset:
 
 I'm not an expert in the Supplements, so please reach out to me on GitHub if you'd like enhancements or fixes to this application. If you use this data frequently, I'd love to collaborate with your team!
 
+# Terms of Use
 
-
+This project and data is licensed under GNU v3. See LICENSE file above for more info. 

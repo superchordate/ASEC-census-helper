@@ -1,5 +1,6 @@
 setBookmarkExclude(c(
-    'remove_field', 'reset_selected_fields', 'add_field', 'selected_topics', 'table', 'tab', 'toggle_preview',
+    'remove_field', 'reset_selected_fields', 'add_field', 'selected_topics', 'table', 'tab', 'toggle_preview', 'selected_fields_reset',
+    'bookmark_load', 
     # table parts.
     sapply(c(
         'table-data'
@@ -19,5 +20,9 @@ onBookmarked(function(url) {
 
 onRestore(function(state) {
     selected_fields = state$input$selected_fields
-    if(!is.null(selected_fields)) updateSelectizeInput(session, 'selected_fields', choices = selected_fields, selected = selected_fields)
+    if(!is.null(selected_fields)){
+        updateSelectizeInput(session, 'selected_fields', choices = selected_fields, selected = selected_fields)
+        updateTextInput(session, 'bookmark_load', value = '')
+        updateTextInput(session, 'bookmark_load', value = 'go')
+    }
 })

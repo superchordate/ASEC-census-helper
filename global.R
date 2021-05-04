@@ -15,7 +15,6 @@ begin()
 enableBookmarking(store = "url")
 
 islocal = Sys.getenv('SHINY_PORT') == ""
-globaldt = list()
 
 # read global files.
 for(i in list.files('global', pattern = '[.][Rr]', recursive = TRUE, full.names = TRUE )) source( i, local = TRUE )

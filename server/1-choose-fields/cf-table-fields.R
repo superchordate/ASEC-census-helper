@@ -65,21 +65,33 @@ topicfields = reactive({
     tablefields() %>% filter(subtopic %in% input$selected_topics)
 })
 
-fields_ul = function(fields, labels = NULL, dynamic = TRUE) {
+fields_ul = function(fields, labels = NULL, forselected = TRUE) {
 
     if(is.null(labels)) labels = fields
+    if(forselected && length(fields) == 0) return(tags$ul(id = 'fields'))
 
     tags$ul(
         id = 'fields',
-        lapply(1:length(fields), function(i) tags$li(class = 'lifade', div(
-            class = cc('clickable', if(!dynamic) ' small'),
-            onclick = if(dynamic){
-                cc("$(this).fadeOut(250, function(){ Shiny.onInputChange('add_field', '", labels[i], "'); })")
-            } else {
-                cc("$(this).fadeOut(250, function(){ Shiny.onInputChange('remove_field', '", labels[i], "'); })")
-            },
-            p(if(dynamic){ fields[i] } else { labels[i] })
-        ))),
+        lapply(1:length(fields), function(i){
+            
+            id = gsub('[^a-z]', '', tolower(labels[i]))
+
+            tags$li(class = 'lifade', id = id, div(
+                class = cc('clickable', if(forselected) ' small'),
+                style = 'position: relative',
+                onclick = if(forselected){
+                    cc("unselect_field('", id, "', '", labels[i], "');")
+                } else {
+                    cc("select_field('", id, "', '", labels[i], "');")
+                },
+                if(forselected) div(
+                    style = 'position: absolute; top: 0px; left: 0px; font-size: 10pt; padding: 5px; padding-top: 0;',
+                    HTML('<i class="fas fa-window-close"></i>')
+                ),
+                p(if(!forselected){ fields[i] } else { labels[i] })
+            ))
+
+        }),
         # fade options in.
         tags$script('
             // https://stackoverflow.com/questions/37109870/fade-in-each-li-one-by-one/37109947
@@ -101,20 +113,29 @@ output[['table-fields']] = renderUI({ if(isval(input$table) && isval(input$selec
 
     #ifields = ifields %>% select(recordtype, subtopic, field) %>% distinct(
     ifields$selection_label = cc(ifields$desc, ' [', ifields$recordtype, ']')
-    ifields$selected = ifields$selection_label %in% input$selected_fields
+    ifields$selected = ifields$selection_label %in% isolate(input$selected_fields)
     
     ifields %<>% select(desc, selection_label) %>% distinct()
     
-    fields_ul(fields = ifields$desc, labels = ifields$selection_label)
+    fields_ul(fields = ifields$desc, labels = ifields$selection_label, forselected = FALSE)
     
 }})
 
 output$selected_fields_show = renderUI({
-    if(nanull(input$selected_fields)) return(div())
+    
+    # reactivity.
+    input$bookmark_load
+
+    iselected_fields = isolate(input$selected_fields)
+    print(iselected_fields)
+
     div(
         style = 'margin-bottom: 10px; ', 
+        class = if(length(iselected_fields) == 0) 'hidden',
         p('Selected Fields: '),
-        fields_ul(input$selected_fields, dynamic = FALSE)
+        actionButton('selected_fields_reset', 'Reset'),
+        br(),
+        fields_ul(iselected_fields)
     )
 })
 

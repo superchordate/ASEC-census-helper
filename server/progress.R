@@ -9,7 +9,7 @@ proginit = function(message = '', value = 0){
     }
 }
 
-proginc = function(message = '', pct = 0.15) if(!is.null(progress)) {
+proginc = function(message = '', pct = 0.05) if(!is.null(progress)) {
     progress$inc(pct, detail = message)
 }
 

@@ -93,3 +93,8 @@ th, td { padding: 3px; }
 #previewbutton p.bold { opacity: 1; font-weight: 500; }
 
 #selected_fields_show > div > p { color: White; opacity: 0.5; }
+
+#selected_fields_reset { 
+    border-radius: 0; background-color: rgba(255, 255, 255, .3); border: none; color: White; 
+    padding: 5px; padding-right: 7px; padding-left: 7px; 
+}

@@ -21,10 +21,12 @@ ui = function(){
     div( style = 'margin-top: 30px; margin-left: 30px;',
 
       h1(class = 'inline', id = 'bigheader', 'Census Source'),    
+
+      p(class = 'italic mobile-only', style = 'color: white; font-family: Work Sans; font-weight: 400; margin-bottom: 10px; ', 'Best viewed on Desktop'),
       
       div(
         style = 'margin-left: 25px; ',
-        p(class = 'belowheader', 'One stop for easy access to 688 fields across 3 tables from the Social and Economic Supplements.'),
+        p(class = 'belowheader', 'One stop for easy access to 700 fields across 3 tables from the Social and Economic Supplements.'),
         uiOutput('selected_fields_show'),
         uiOutput('previewdownload')
       ),
@@ -59,6 +61,8 @@ ui = function(){
       textInput(inputId = 'add_field', label = NULL, value = ''),      
       textInput(inputId = 'remove_field', label = NULL, value = ''),
       textInput('reset_selected_fields', label = NULL, value = ''),
+      textInput(inputId = 'bookmark_load', label = NULL, value = ''),
+      
 
       selectizeInput(inputId = 'selected_topics', label = NULL, choices = c(), multi = FALSE),
       selectizeInput(inputId = 'table', label = NULL, choices = c('Household', 'Family', 'Person'), multi = TRUE),
@@ -73,7 +77,7 @@ ui = function(){
       style = 'position: absolute; top: 0; right: 0; color: White; padding: 10px; ',
       div(
         HTML('<i class="fas fa-share" style="transform: rotate(-90deg); "></i>'),
-        p(class = 'inline', style = 'margin-top: 8px; ', 'Bookmark/Share This URL')
+        p(class = 'inline', style = 'margin-top: 8px; ', 'Bookmark/Share the URL')
       ),
       a(
         class = 'clickable',
