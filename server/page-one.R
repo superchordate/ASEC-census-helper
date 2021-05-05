@@ -9,11 +9,12 @@ table_li = function(tables){
                 class = 'clickable', 
                 style = 'position: relative;',
                 id = glue('{table}-li'), 
-                onclick = if(dynamic){
-                    cc("$('#choosetable li').fadeOut(100, function(){ Shiny.onInputChange('table', '", table, "'); })")
-                } else {
-                    "Shiny.onInputChange('table', ''); Shiny.onInputChange('selected_topics', '');"
-                },
+                onclick = if(dynamic){ cc("
+                    $('#choosetable li').fadeOut(100, function(){ Shiny.onInputChange('table', '", table, "'); });   
+                ") } else { "
+                    Shiny.onInputChange('table', ''); 
+                    Shiny.onInputChange('selected_topics', '');
+                "},
                 if(length(tables) == 1) div(
                     style = 'position: absolute; top: 0px; left: 0px; font-size: 14pt; padding: 5px; padding-left: 10px; ',
                     HTML('<i class="fas fa-window-close"></i>')

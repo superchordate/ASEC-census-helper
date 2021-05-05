@@ -28,7 +28,12 @@ pd_data = function(){ # only used for chart so no reactive needed
     # everything else is Other.
     proginc('Groups')
     idt = idt[, .(rows = .N), by = nonnum][order(-rows)]
-    idt = sums[idt, on = nonnum]
+    if(length(nonnum) > 0){
+        idt = sums[idt, on = nonnum]
+    } else {
+        sums$rows = idt$rows
+        idt = sums
+    }
     idt = head(idt)
 
     proginc('Group Other')

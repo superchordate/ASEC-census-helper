@@ -74,10 +74,11 @@ ui = function(){
       
     ),
     div(
+      id = "toprightinfo",
       style = 'position: absolute; top: 0; right: 0; color: White; padding: 10px; ',
       div(
         HTML('<i class="fas fa-share" style="transform: rotate(-90deg); "></i>'),
-        p(class = 'inline', style = 'margin-top: 8px; ', 'Bookmark/Share the URL')
+        p(class = 'inline', style = 'margin-top: 8px; ', 'Share Selections via URL')
       ),
       a(
         class = 'clickable',

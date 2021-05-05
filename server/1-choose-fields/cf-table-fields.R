@@ -15,11 +15,12 @@ subtopic_squares = function(subtopics){
         lapply(subtopics, function(subtopic) tags$li(class = 'lifade', div(
             class = 'clickable',
             style = 'position: relative; ',
-            onclick = if(dynamic){
-                cc("$('.subtopics li').fadeOut(100, function(){ Shiny.onInputChange('selected_topics', '", subtopic, "'); })")
-            } else {
-                "Shiny.onInputChange('selected_topics', '');"
-            },
+            onclick = if(dynamic){cc("
+                $('.subtopics li').fadeOut(100, function(){ Shiny.onInputChange('selected_topics', '", subtopic, "'); });
+            ")
+            } else { "
+                Shiny.onInputChange('selected_topics', ''); 
+            "},
             if(length(subtopics) == 1) div(
                 style = 'position: absolute; top: 0px; left: 0px; font-size: 14pt; padding: 5px; padding-left: 10px; ',
                 HTML('<i class="fas fa-window-close"></i>')
@@ -32,6 +33,7 @@ subtopic_squares = function(subtopics){
             $(".subtopics li").each(function(i) {
                 $(this).delay(', ifelse(dynamic, 500, 100), ').fadeIn(150);
             });
+            nextstep(1600, 0, true);
         ')
     )
 
@@ -81,9 +83,9 @@ fields_ul = function(fields, labels = NULL, forselected = TRUE) {
                 style = 'position: relative',
                 onclick = if(forselected){
                     cc("unselect_field('", id, "', '", labels[i], "');")
-                } else {
-                    cc("select_field('", id, "', '", labels[i], "');")
-                },
+                } else { cc("
+                    select_field('", id, "', '", labels[i], "'); 
+                ") },
                 if(forselected) div(
                     style = 'position: absolute; top: 0px; left: 0px; font-size: 10pt; padding: 5px; padding-top: 0;',
                     HTML('<i class="fas fa-window-close"></i>')
@@ -124,10 +126,9 @@ output[['table-fields']] = renderUI({ if(isval(input$table) && isval(input$selec
 output$selected_fields_show = renderUI({
     
     # reactivity.
-    input$bookmark_load
+    c(input$bookmark_load, input$selected_fields_reset)
 
     iselected_fields = isolate(input$selected_fields)
-    print(iselected_fields)
 
     div(
         style = 'margin-bottom: 10px; ', 
