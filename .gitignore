@@ -1,7 +1,10 @@
+data/raw-data
+cache/
+app/data
+todo
+
 *.dcf
 *.zip
-data/
-todo
 deploy.R
 
 # History files
