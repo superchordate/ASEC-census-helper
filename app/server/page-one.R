@@ -1,3 +1,4 @@
+fade_dur = 300
 table_li = function(tables){
 
     dynamic = length(tables) > 1
@@ -23,12 +24,12 @@ table_li = function(tables){
             ))
         }),
         # fade options in.
-        tags$script('
+        tags$script(cc('
             // https://stackoverflow.com/questions/37109870/fade-in-each-li-one-by-one/37109947
             $("#choosetable li").each(function(i) {
-                $(this).delay(500 * i).fadeIn(500);
+                $(this).delay(', fade_dur, ' * i).fadeIn(', fade_dur, ');
             });
-        ')
+        '))
     )
 
 }

@@ -28,13 +28,13 @@ subtopic_squares = function(subtopics){
             p(subtopic)
         ))),
         # fade options in.
-        tags$script('
+        tags$script(cc('
             // https://stackoverflow.com/questions/37109870/fade-in-each-li-one-by-one/37109947
             $(".subtopics li").each(function(i) {
                 $(this).delay(', ifelse(dynamic, 500, 100), ').fadeIn(150);
             });
-            nextstep(1600, 0, true);
-        ')
+            nextstep(', fade_dur * 3 + 150, ', 0, true);
+        '))
     )
 
 }
