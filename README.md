@@ -3,10 +3,14 @@
 
 [Annual Social and Economic Supplements](https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html) data (ASEC) is incredibly valuable, but existing tools for finding and extracting data are difficult to use. **ASEC Census Helper** provides a fast and user-friendly tool to select and download data from the ASEC in a user-friendly format.
 
+I built this tool as a submission for Posit's annual competition in 2021.
+
 *Census source is in development. Some of the value mappings are not complete. More to come!*  
 *The app hasn't been updated since 2020.*
 
-| Census.gov                                    | Census Source                                                |
+Here are some ways that ASEC Census Helper improves on Census.gov.
+
+| Census.gov                                    | ASEC Census Helper                                               |
 | --------------------------------------------- | ------------------------------------------------------------ |
 | Different years are in different files.       | 2019 and 2020 are combined. This makes it easy to compare years. Long term, we'd like to get the last 10 years into the app. |
 | Over 700 fields.                              | Only download the fields you need.                           |
