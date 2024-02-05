@@ -2,10 +2,10 @@ data/raw-data
 cache/
 app/data
 todo
+secrets
 
 *.dcf
 *.zip
-deploy.R
 
 # History files
 .Rhistory
