@@ -12,7 +12,7 @@ ui = function(){
   
   shinyUI( fluidPage(
   
-    div(class = 'hide', titlePanel('Census Source')),
+    div(class = 'hide', titlePanel('ASEC Census Helper by Bryce Chamberlain')),
     uihead(),
 
     # highcharts defaults.
@@ -20,13 +20,13 @@ ui = function(){
 
     div( style = 'margin-top: 30px; margin-left: 30px;',
 
-      h1(class = 'inline', id = 'bigheader', 'Census Source'),    
+      h1(class = 'inline', id = 'bigheader', 'ASEC Census Helper'),    
 
       p(class = 'italic mobile-only', style = 'color: white; font-family: Work Sans; font-weight: 400; margin-bottom: 10px; ', 'Best viewed on Desktop'),
       
       div(
-        style = 'margin-left: 25px; ',
-        p(class = 'belowheader', 'One stop for easy access to 700 fields across 3 tables from the Social and Economic Supplements.'),
+        style = 'margin-left: 10px; ',
+        p(class = 'belowheader', 'Easy access to 700 fields across 3 tables from the Annual Social and Economic Supplements.'),
         uiOutput('selected_fields_show'),
         uiOutput('previewdownload')
       ),
@@ -86,7 +86,7 @@ ui = function(){
         href = 'https://github.com/superchordate/census-source', target = '_blank',
         p(class = 'inline', style = 'margin-top: 5px; ', 'Guide on '),
         img(
-          style = 'height: 25px;',
+          style = 'height: 25px; position: relative; top: 1px; left: -2px;',
           src = 'GitHub_Logo_White.png'
         )
       )
