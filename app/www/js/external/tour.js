@@ -108,7 +108,7 @@ function nextstep(timeout, istep, first){
                         >
                             <div class="continue">
                                 <p class="content">` + steps[step].content + `</p>
-                                <p class="clicktocontinue">Click to close tutorial.</p>
+                                <p class="clicktocontinue">Close tutorial.</p>
                             </div>
                         </div>
                     `);

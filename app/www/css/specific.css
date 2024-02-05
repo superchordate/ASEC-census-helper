@@ -22,7 +22,7 @@
 
 /* intro header */
 #bigheader { font-family: Raleway Dots; color: white; opacity: .7; font-size: 32pt; margin-top: 0; margin-left: 10px;}
-.belowheader { font-family: Work Sans; font-weight: 300; color: white; font-size: 16pt; margin-bottom: 10px; }
+.belowheader { font-family: Work Sans; font-weight: 300; color: white; font-size: 12pt; margin-bottom: 10px; }
 
 /* category list */
 #table-fields-ui { width: calc(100% - 400px); }
@@ -37,8 +37,8 @@
 #choosetable { margin: 0; padding: 0; animation-delay: 3s;}
 .lifade { display: none; float: left; }
 .lifade > div {
-    display: table; background-color: #b98d72; width: 300px; height: 200px; margin-left: 25px; 
-    text-align: center; font-family: Work Sans; font-size: 30pt; color: white;
+    display: table; background-color: #b98d72; width: 225px; height: 150px; margin-left: 25px; 
+    text-align: center; font-family: Work Sans; font-size: 24pt; color: white;
     font-weight: 700; float: left; list-style: none; margin-top: 35px; 
     text-align: center; 
 }
@@ -46,13 +46,15 @@
 
 /* subtopic */
 .subtopics > li > div { 
-    font-size: 20pt; width: 250px; height: 130px; padding-top: 0px; 
-    font-weight: 300; background-color: #ae4951;
+    font-size: 12pt; width: 135px; height: 90px; padding-top: 0px; 
+    font-weight: 300; margin-left: 15px; margin-top: 15px; 
+    background-color: #ae4951; 
 }
 
 #fields > li > div {
-    font-size: 16pt; width: 200px; height: 125px; padding-top: 0px; 
-    font-weight: 300; background-color: #161b1f; color: white;
+    font-size: 12pt; width: 135px; height: 90px; padding-top: 0px; 
+    font-weight: 300; margin-left: 15px; margin-top: 15px; 
+    background-color: #161b1f; color: white;
 }
 #fields .small {
     font-size: 12pt; width: 160px; height: 100px; margin-top: 5px; margin-left: 0; margin-right: 10px; 

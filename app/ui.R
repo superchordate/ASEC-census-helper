@@ -26,7 +26,11 @@ ui = function(){
       
       div(
         style = 'margin-left: 10px; ',
-        p(class = 'belowheader', 'Easy access to 700 fields across 3 tables from the Annual Social and Economic Supplements.'),
+        p(class = 'belowheader', HTML('
+          Easier access to 700 fields from the Annual Social and Economic Supplements (2019, 2020).<br/>
+          It isn\'t perfect (a field search bar would be great!) but hopefully this still makes it easier to use this data. 
+        ')),
+        br(),
         uiOutput('selected_fields_show'),
         uiOutput('previewdownload')
       ),
