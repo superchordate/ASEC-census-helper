@@ -22,7 +22,7 @@ subtopic_squares = function(subtopics){
                 Shiny.onInputChange('selected_topics', ''); 
             "},
             if(length(subtopics) == 1) div(
-                style = 'position: absolute; top: 0px; left: 0px; font-size: 14pt; padding: 5px; padding-left: 10px; ',
+                class = 'closebutton',
                 HTML('<i class="fas fa-window-close"></i>')
             ),
             p(subtopic)

@@ -1,5 +1,9 @@
 /* CSS specific to classes and IDs in this app only. */
 
+.closebutton {
+    position: absolute; top: 0px; left: 0px; font-size: 14pt; padding: 5px; padding-left: 10px; 
+}
+
 /* data preview */
 #table-data-ui {
     position: fixed; top: 10px; right: 5px; padding: 0;
@@ -17,7 +21,7 @@
 /*#table-data table tr:nth-child(odd) { background-color: #E1DCD9; }*/
 
 /* intro header */
-#bigheader { font-family: Raleway Dots; color: white; opacity: .7; font-size: 72pt; margin-top: 0; }
+#bigheader { font-family: Raleway Dots; color: white; opacity: .7; font-size: 32pt; margin-top: 0; margin-left: 10px;}
 .belowheader { font-family: Work Sans; font-weight: 300; color: white; font-size: 16pt; margin-bottom: 10px; }
 
 /* category list */
