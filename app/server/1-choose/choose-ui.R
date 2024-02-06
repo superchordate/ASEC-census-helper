@@ -40,18 +40,46 @@ output$subselector_subtopics = renderUI({
   
 })
 
+last_features_available = NULL
+
 output[['features_available']] = renderReactable({
+  
+  last_features_available <<- cc(fields$recordtype, fields$field, sep = '-')
+  
+  fields %>% 
+    clean_names() %>%
+    reactable(          
+      selection = "multiple",
+      onClick = "select"
+    )
+
+})
+
+# observer to update with filtered data. 
+observe({
   
     # this will initially run before the inputs are loaded. 
     if(is.null(input$Tables)) return()
 
-    dt = fields %>% filter(recordtype %in% input$Tables)
-    
+
+    # get filtered data. 
+    dt = fields     
+    if(length(input$Tables) < 3) dt %<>% filter(recordtype %in% input$Tables)    
     if(!is.null(input$Topics)) dt %<>% filter(topic %in% input$Topics)
     if(!is.null(input$Subtopics)) dt %<>% filter(subtopic %in% input$Subtopics)
+    if(nrow(dt) == nrow(fields)) return()
 
-    dt %>%
-        clean_names() %>%
-        reactable()
+    # get new selected values. 
+    new_features = cc(dt$recordtype, dt$field, sep = '-')
+    prior_selected_features = isolate(reactable::getReactableState('features_available')$selected)
+    if(length(prior_selected_features) > 0) prior_selected_features = last_features_available[prior_selected_features]
+
+    updateReactable(
+      'features_available', 
+      data = dt %>% clean_names(),
+      selected = which(new_features %in% prior_selected_features)
+    )
+
+    last_features_available <<- new_features
 
 })

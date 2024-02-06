@@ -26,7 +26,7 @@ ui = function(...) dashboardPage(
   dashboardHeader(title = 'ASEC Census Helper by Bryce Chamberlain'),
   dashboardSidebar(
     uihead(),
-    useShinyjs(),
+    # useShinyjs(),
     disable = TRUE
   ),
   dashboardBody(
