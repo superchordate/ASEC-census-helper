@@ -1,20 +1,57 @@
 table_choices = c('Household', 'Family', 'Person')
 
 output[['Choose Fields']] = renderUI(div(
-    userinput$select(label = 'Tables', choices = table_choices, multi = TRUE, selected = table_choices, width = 180),
-    reactableOutput('features_available')
+  h1('Available'),
+  div(style = 'display: table; height: 200px; width: 100%',
+    div(
+      style = 'display: table-cell; width: 200px;',
+      userinput$select(label = 'Tables', choices = table_choices, multi = TRUE, selected = table_choices, width = 180),
+      uiOutput('subselector_topics'),
+      uiOutput('subselector_subtopics')
+    ),    
+    div(
+      style = 'display: table-cell; width: calc(100% - 200px);',
+      reactableOutput('features_available', height = 400)
+    )
+  ),
+  h1('Selected')
 ))
 
+output$subselector_topics = renderUI(userinput$select(
+    label = 'Topics', 
+    choices = fields %>% filter(recordtype %in% input$Tables) %>% pull(topic) %>% unique(), 
+    multi = TRUE, selected = table_choices, width = 180
+))
+
+output$subselector_subtopics = renderUI({
+  
+  choices = if(!is.null(input$Topics)){
+    fields %>% filter(recordtype %in% input$Tables, topic %in% input$Topics) %>% pull(subtopic)
+  } else {
+    fields %>% pull(subtopic) 
+  } %>%
+    unique()
+  
+  userinput$select(
+    label = 'Subtopics', 
+    choices = choices, 
+    multi = TRUE, width = 180
+  )
+  
+})
+
 output[['features_available']] = renderReactable({
-    fields %>%
-        filter(recordtype %in% input$Tables) %>%
-        select(
-            Table = recordtype,
-            Category = topic,
-            Subcategory = subtopic,
-            `Field ID` = field,
-            Description = desc,
-            `Sample of Values` = sample
-        ) %>%
+  
+    # this will initially run before the inputs are loaded. 
+    if(is.null(input$Tables)) return()
+
+    dt = fields %>% filter(recordtype %in% input$Tables)
+    
+    if(!is.null(input$Topics)) dt %<>% filter(topic %in% input$Topics)
+    if(!is.null(input$Subtopics)) dt %<>% filter(subtopic %in% input$Subtopics)
+
+    dt %>%
+        clean_names() %>%
         reactable()
+
 })

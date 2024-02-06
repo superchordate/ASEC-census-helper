@@ -22,7 +22,7 @@ tabs = lapply(c(
   ), function(tab) tabPanel(title = tab, uiOutput(tab))
 )
 
-ui = dashboardPage(
+ui = function(...) dashboardPage(
   dashboardHeader(title = 'ASEC Census Helper by Bryce Chamberlain'),
   dashboardSidebar(
     uihead(),
