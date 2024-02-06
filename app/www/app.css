@@ -1,5 +1,11 @@
 .tab-content { 
-    padding: 10px; background-color: white; 
+    padding: 10px; 
     border-left: 1px solid #ddd; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd; 
 }
-
+.tablecontainer h1 { 
+    font-size: 14pt; background-color: #cccccc; color: white; display: inline; 
+    padding: 5px; 
+}
+.tablecontainer {
+    display: table-cell; width: calc(100% - 190px); background-color: white; padding: 10px; padding-top: 15px;
+}

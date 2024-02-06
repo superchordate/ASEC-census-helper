@@ -68,13 +68,12 @@ if(!cache.ok(3)){
     # select necessary field cols and rename field = desc.
     fields %<>%
         select(
+            field, 
+            desc, 
             recordtype, 
             topic, 
             subtopic, 
-            field, 
-            desc, 
-            values, 
-            universe
+            values
         ) %>% 
         mutate(desc = gsub(',', '', desc)) # data.table does not allow , in names. 
     
