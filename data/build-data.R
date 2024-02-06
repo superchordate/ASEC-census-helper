@@ -22,6 +22,8 @@ for(i in names(household)) qsave(household[[i]], glue('../app/data/household-{i}
 for(i in names(family)) qsave(family[[i]], glue('../app/data/family-{i}'))
 
 fields = distinct(fields)
+fields$id = 1:nrow(fields)
+
 qsavem(
   match_keys, fields,
   file = '../app/data/appdata'
