@@ -1,5 +1,5 @@
 
-https://superchordate.shinyapps.io/ASEC-census-helper 
+View the live site at: https://superchordate.shinyapps.io/ASEC-census-helper 
 
 # Why ASEC Census Helper?
 
