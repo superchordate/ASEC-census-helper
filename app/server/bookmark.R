@@ -1,12 +1,4 @@
-setBookmarkExclude(c(
-    'remove_field', 'reset_selected_fields', 'add_field', 'selected_topics', 'table', 'tab', 'toggle_preview', 'selected_fields_reset',
-    'bookmark_load', 
-    # table parts.
-    sapply(c(
-        'table-data'
-        ), function(x) cc(x, c('_row_last_clicked', '_cell_clicked', '_rows_all', '_rows_current', '_cells_selected', '_search'))
-    )
-))
+setBookmarkExclude()
 
 observe({
     input$selected_fields # only bookmark selected_fields

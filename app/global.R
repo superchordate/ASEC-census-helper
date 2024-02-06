@@ -9,6 +9,7 @@ require(DT)
 require(qs)
 require(shinyjs)
 require(stringr)
+require(shinydashboard)
 
 begin()
 

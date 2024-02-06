@@ -1,3 +1,5 @@
+l = function(x) if(islocal) cat(x, '\n')
+
 # https://shiny.rstudio.com/articles/progress.html
 progress = NULL
 
@@ -17,3 +19,4 @@ progclose = function()if(!is.null(progress)){
     progress$close()
     progress <<- NULL
 }
+
