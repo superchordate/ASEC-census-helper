@@ -17,13 +17,21 @@ uihead = function(){
     
 }
 
+tabs = lapply(c(
+  'Choose Fields', 'Create Your Download', 'Make a Chart'
+  ), function(tab) tabPanel(title = tab, uiOutput(tab))
+)
+
 ui = dashboardPage(
   dashboardHeader(title = 'ASEC Census Helper by Bryce Chamberlain'),
   dashboardSidebar(
     uihead(),
-    useShinyjs()
+    useShinyjs(),
+    disable = TRUE
   ),
-  dashboardBody(p('Hello, World!'))
+  dashboardBody(
+    do.call(tabsetPanel, tabs)
+  )
 )
 
     # div(

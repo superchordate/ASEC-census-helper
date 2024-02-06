@@ -1,4 +1,4 @@
-setBookmarkExclude()
+setBookmarkExclude(c('sidebarCollapsed'))
 
 observe({
     input$selected_fields # only bookmark selected_fields
