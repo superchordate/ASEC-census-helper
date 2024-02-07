@@ -1,55 +1,49 @@
 
-View the live site at: https://superchordate.shinyapps.io/ASEC-census-helper 
+Use the live app at: https://superchordate.shinyapps.io/ASEC-census-helper.
 
-# Why ASEC Census Helper?
+*Census source is in development. Some of the value mappings are not complete. Contributions are welcome. More to come!*  
+*Data has not been updated since 2020. Contributions are invited to update to include the latest data. Otherwise, I'll updated it when I can find time.*  
 
-[Annual Social and Economic Supplements](https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html) data (ASEC) is incredibly valuable, but existing tools for finding and extracting data are difficult to use. **ASEC Census Helper** provides a fast and user-friendly tool to select and download data from the ASEC in a user-friendly format.
-
-I built this tool as a submission for Posit's annual competition in 2021.
-
-*Census source is in development. Some of the value mappings are not complete. More to come!*  
-*The app hasn't been updated since 2020.*
-
-Here are some ways that ASEC Census Helper improves on Census.gov.
-
-| Census.gov                                    | ASEC Census Helper                                               |
-| --------------------------------------------- | ------------------------------------------------------------ |
-| Different years are in different files.       | 2019 and 2020 are combined. This makes it easy to compare years. Long term, we'd like to get the last 10 years into the app. |
-| Over 700 fields.                              | Only download the fields you need.                           |
-| Field names are not intuitive.                | Field names are replaced with their human-readable descriptions and tagged with the table they come from. |
-| Values are keys (1, 2, 3 vs. high, med, low). | Values are human-readable and ready-to-use.                  |
-
-
-# Quickstart
-
-How to get the most out of Census Source:
-
-1. **Select Data Fields**: Click tables and fields to add the fields you need.
-2. **Preview Your Data**: Click Preview to see information about your download before taking the time to create the full file. Previews are grouped, but downloads will give you data that is not summarized.
-3. **Download Your Data**: Click Download to get your data in CSV format. The app will find your data and perform necessary joins so you get a single, ready-to-use ASEC dataset. Downloads will include relevant record keys to connect observations over time. `H_IDNUM` and `PERIDNUM` connect records across years, and FILEDATE is the date of the survey (MMDDYY).
-4. **Continue Exploring**: Plop your data into Power BI or Tableau to build your charts and tables. 
-
-*Pro Tip: **Bookmark** or **Share** the URL to select the same fields again later.* 
-
-
-# About the Data
-
-**WARNING**
-
-There is a risk of double-counting metrics when mixing Household/Family characteristics with Person-level. Always use Person-level metrics if you are using Person-level data, or take special care to filter to distinct Households/Families before using Household/Family metrics. 
-
-**What are the Supplements?**
+# ASEC Census Helper
 
 From [health.gov](https://health.gov/healthypeople/objectives-and-data/data-sources-and-methods/data-sources/current-population-survey-annual-social-and-economic-supplement-cps-asec):
 
-> The Current Population Survey (CPS) is a monthly survey that provides  current estimates and trends in employment, unemployment, earnings, and  other characteristics of the general labor force, the population as a  whole, and various population subgroups. The Annual Social and Economic  Supplement (CPS-ASEC) is conducted annually in the months of February,  March, and April. In addition to the usual monthly labor force data, this supplement provides information on work experience, income, noncash benefits, and migration of Persons ages 15 years and older.
+> The Current Population Survey (CPS) is a monthly survey that provides current estimates and trends in employment, unemployment, earnings, and  other characteristics of the general labor force, the population as a  whole, and various population subgroups. The Annual Social and Economic  Supplement (CPS-ASEC) is conducted annually in the months of February, March, and April. In addition to the usual monthly labor force data, this supplement provides information on work experience, income, noncash benefits, and migration of Persons ages 15 years and older.
 
-Here are some links if you'd like to learn more about this dataset:
+As you can imagine, this is a very powerful and comprehensive dataset that can support all kinds of research. 
+
+Unfortunately though, it is very difficult to use. For example, here are some issues that this project seeks to address:
+
+* Different years are in different files.
+* Over 700 fields, making files unweildy.
+* Field names are often not intuitive and must be paired with data dictionaries for comprehension. 
+* Values are keys that must be mapped to values for comprehension. For example, instead of Male or Female you'll see numbers like 1 and 2.
+
+This project packages up this data for easier use. 
+
+Here are some links if you'd like to learn more:
 
 * [About the Current Population Survey](https://www.census.gov/programs-surveys/cps/about.html)
 * [Homepage for Annual Social and Economic Supplement (ASEC) of the Current Population Survey (CPS)](https://www.census.gov/programs-surveys/saipe/guidance/model-input-data/cpsasec.html)
 * [Paper About Using ASEC](https://cps.ipums.org/cps/resources/linking/4.workingpaper16.pdf)
 * [Download raw data](https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.2020.html)
+* [Download My Full Processed Dataset](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip) (4 RDS files, 63 MB). This data is easier to use than raw ASEC data but will require you to perform your own joins. RDS files can be read in using R or RStudio and from there can be converted to other formats. It is also possible to [read RDS into Power BI](https://www.sqlshack.com/import-data-using-r-in-power-bi/) using the `readRDS` function.
+
+
+## Installing Locally
+
+You may want to run this app locally. You can do so via these steps:
+
+* Install R and RStudio and clone this repository to your local machine.
+* Download [this data](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip) and unzip it into `data/raw-data`, this will create folder `data/raw-data/asec-clean-2019-2020` with the necessary RDS files. 
+* Run `data\build-data-fromexport.R` to build the app data files (RStudio will prompt you to install the necessary packages first).
+* Run `app\global.R` to run the app (RStudio will prompt you to install the necessary packages first).
+
+## Other Information
+
+**WARNING**
+
+There is a risk of double-counting metrics when mixing Household/Family characteristics with Person-level. Always use Person-level metrics if you are using Person-level data, or take special care to filter to distinct Households/Families before using Household/Family metrics. 
 
 **How is the Data Prepared?**
 
@@ -57,11 +51,11 @@ File preparation steps can be viewed at `data/scripts`. We use caching from `eas
 
 See `app/server/data.R` to review how the app prepares each specific download. 
 
-# Terms of Use
+**Terms of Use**
 
 This project is licensed under GNU v3. See LICENSE file for more info. 
 
-## Get Involved
+**Get Involved**
 
 I'm not an expert in the ASEC data, so please reach out to me if you'd like enhancements or fixes to this application. If you use this data frequently, I'd love to collaborate with your team!  
 

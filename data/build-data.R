@@ -22,19 +22,16 @@ for(i in names(person)) qsave(person[[i]], glue('../app/data/person-{i}'))
 for(i in names(household)) qsave(household[[i]], glue('../app/data/household-{i}'))
 for(i in names(family)) qsave(family[[i]], glue('../app/data/family-{i}'))
 
-qsavem(
-  match_keys, fields,
-  file = '../app/data/appdata'
-)
+qsavem(fields, file = '../app/data/appdata')
 
 # save output zip.
 zipname = 'asec-clean-2019-2020'
 if(!file.exists(glue('out/{zipname}.zip'))){
-  if(!dire.exists(glue('out/{zipname}'))) dir.create(glue('out/{zipname}'))
-  w(fields, glue('out/{zipname}/fields.csv'))
-  w(family, glue('out/{zipname}/family.csv'))
-  w(household, glue('out/{zipname}/household.csv'))
-  w(person, glue('out/{zipname}/person.csv'))
+  if(!dir.exists(glue('out/{zipname}'))) dir.create(glue('out/{zipname}'))
+  saveRDS(fields, glue('out/{zipname}/fields.RDS'))
+  saveRDS(family, glue('out/{zipname}/family.RDS'))
+  saveRDS(household, glue('out/{zipname}/household.RDS'))
+  saveRDS(person, glue('out/{zipname}/person.RDS'))
   zip(zipfile = glue('out/{zipname}'), files = glue('out/{zipname}'))
   file.remove(list.files(glue('out/{zipname}'), full.names = TRUE))
 }

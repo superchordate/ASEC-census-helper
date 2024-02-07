@@ -19,7 +19,9 @@ output[['Make a Chart']] = renderUI(div(
       )
 
     ),
-    div(),
+    div(
+      p('UNDER CONSTRUCTION')
+    ),
     hidden(textInput('dummy_makeachart', label = NULL)) # to trigger setting defaults.
   )
 ))

@@ -21,7 +21,7 @@ tabs = lapply(c(
   'Choose Fields', 'Create Your Download', 'Make a Chart'
   ), function(tab) tabPanel(title = tab, uiOutput(tab))
 )
-tabs$selected = 'Make a Chart'
+#tabs$selected = 'Make a Chart'
 
 ui = function(...) dashboardPage(
   dashboardHeader(title = 'ASEC Census Helper by Bryce Chamberlain'),
