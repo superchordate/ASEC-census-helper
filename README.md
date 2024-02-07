@@ -35,9 +35,9 @@ Here are some links if you'd like to learn more:
 You may want to run this app locally. You can do so via these steps:
 
 * Install R and RStudio and clone this repository to your local machine.
-* Download [this data](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip) and unzip it into `data/raw-data`, this will create folder `data/raw-data/asec-clean-2019-2020` with the necessary RDS files. 
-* Run `data\build-data-fromexport.R` to build the app data files (RStudio will prompt you to install the necessary packages first).
-* Run `app\global.R` to run the app (RStudio will prompt you to install the necessary packages first).
+* Download [this data](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip) into `data/raw-data` and unzip with "Unzip Here" or similar. This will create folder `data/raw-data/asec-clean-2019-2020` with the necessary RDS files. 
+* Run `data/build-data-fromexport.R` to build the app data files (RStudio will prompt you to install the necessary packages first).
+* Run `app/global.R` to run the app (RStudio will prompt you to install the necessary packages first).
 
 ## Other Information
 
@@ -47,9 +47,9 @@ There is a risk of double-counting metrics when mixing Household/Family characte
 
 **How is the Data Prepared?**
 
-File preparation steps can be viewed at `data/scripts`. We use caching from `easyr` to avoid re-running steps unnecessarily. Each column is split to a distinct file so that scripts only need to read data that has been requested by the user. 
+See `data/scripts`. We use caching from `easyr` to avoid re-running steps unnecessarily. Each column is split to a distinct file so that scripts only need to read data that has been requested by the user. 
 
-See `app/server/data.R` to review how the app prepares each specific download. 
+See `app/server/2-download/data.R` to review how the app prepares each specific download. 
 
 **Terms of Use**
 

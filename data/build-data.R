@@ -15,23 +15,34 @@ runfolder('scripts')
 
 file.remove(list.files('../app/data', full.names = TRUE))
 
-#qsave(household, '../app/data/household', nthreads = 2)
-#qsave(family, '../app/data/family', nthreads = 2)
+# create the folder and clear prior data. 
 if(!dir.exists('../app/data')) dir.create('../app/data')
+file.remove(list.files('../app/data', full.names = TRUE))c
+
+# save new files, one for each column.
 for(i in names(person)) qsave(person[[i]], glue('../app/data/person-{i}'))
 for(i in names(household)) qsave(household[[i]], glue('../app/data/household-{i}'))
 for(i in names(family)) qsave(family[[i]], glue('../app/data/family-{i}'))
 
+# save new files, one for each column.
 qsavem(fields, file = '../app/data/appdata')
 
 # save output zip.
 zipname = 'asec-clean-2019-2020'
 if(!file.exists(glue('out/{zipname}.zip'))){
+  
   if(!dir.exists(glue('out/{zipname}'))) dir.create(glue('out/{zipname}'))
+  
   saveRDS(fields, glue('out/{zipname}/fields.RDS'))
   saveRDS(family, glue('out/{zipname}/family.RDS'))
   saveRDS(household, glue('out/{zipname}/household.RDS'))
   saveRDS(person, glue('out/{zipname}/person.RDS'))
-  zip(zipfile = glue('out/{zipname}'), files = glue('out/{zipname}'))
+  
+  # we have to move into out/ before we zip to avoid that folder being included in the zip.
+  setwd('out/')
+  zip(zipfile = zipname, files = zipname)
+  setwd('../')
+  
   file.remove(list.files(glue('out/{zipname}'), full.names = TRUE))
+  
 }
