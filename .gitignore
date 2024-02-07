@@ -3,6 +3,7 @@ cache/
 app/data
 todo
 secrets
+data/out/
 
 *.dcf
 *.zip

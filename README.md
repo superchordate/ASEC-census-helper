@@ -26,7 +26,7 @@ How to get the most out of Census Source:
 
 1. **Select Data Fields**: Click tables and fields to add the fields you need.
 2. **Preview Your Data**: Click Preview to see information about your download before taking the time to create the full file. Previews are grouped, but downloads will give you data that is not summarized.
-3. **Download Your Data**: Click Download to get your data in CSV format. The app will find your data and perform necessary joins so you get a single, ready-to-use ASEC dataset. Downloads will include relevant record keys to connect observations over time. H_SEQ & F_SEQ connect records across years, and FILEDATE is the date of the survey (MMDDYY).
+3. **Download Your Data**: Click Download to get your data in CSV format. The app will find your data and perform necessary joins so you get a single, ready-to-use ASEC dataset. Downloads will include relevant record keys to connect observations over time. `H_IDNUM` and `PERIDNUM` connect records across years, and FILEDATE is the date of the survey (MMDDYY).
 4. **Continue Exploring**: Plop your data into Power BI or Tableau to build your charts and tables. 
 
 *Pro Tip: **Bookmark** or **Share** the URL to select the same fields again later.* 
@@ -34,11 +34,15 @@ How to get the most out of Census Source:
 
 # About the Data
 
+**WARNING**
+
+There is a risk of double-counting metrics when mixing Household/Family characteristics with Person-level. Always use Person-level metrics if you are using Person-level data, or take special care to filter to distinct Households/Families before using Household/Family metrics. 
+
 **What are the Supplements?**
 
 From [health.gov](https://health.gov/healthypeople/objectives-and-data/data-sources-and-methods/data-sources/current-population-survey-annual-social-and-economic-supplement-cps-asec):
 
-> The Current Population Survey (CPS) is a monthly survey that provides  current estimates and trends in employment, unemployment, earnings, and  other characteristics of the general labor force, the population as a  whole, and various population subgroups. The Annual Social and Economic  Supplement (CPS-ASEC) is conducted annually in the months of February,  March, and April. In addition to the usual monthly labor force data, this supplement provides information on work experience, income, noncash benefits, and migration of persons ages 15 years and older.
+> The Current Population Survey (CPS) is a monthly survey that provides  current estimates and trends in employment, unemployment, earnings, and  other characteristics of the general labor force, the population as a  whole, and various population subgroups. The Annual Social and Economic  Supplement (CPS-ASEC) is conducted annually in the months of February,  March, and April. In addition to the usual monthly labor force data, this supplement provides information on work experience, income, noncash benefits, and migration of Persons ages 15 years and older.
 
 Here are some links if you'd like to learn more about this dataset:
 

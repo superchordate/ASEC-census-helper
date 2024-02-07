@@ -27,17 +27,16 @@ if(!cache.ok(4)){
     rm(i, x)
   }
 
-  fields %<>% mutate(mnemonic = cc(recordtype, field, sep = '-'))
+  fields %<>% mutate(table_field = cc(recordtype, field, sep = '-'))
   fields %<>% arrange(desc(complete), num_values)
   fields %<>% relocate(field, desc, complete, num_values, sample)
 
   fields %<>% filter(complete > 0.05)
 
   # select initial defaults.
-  fields$default = fields$mnemonic %in% c(
+  fields$default = fields$table_field %in% c(
     'Household-State',
     'Household-County',
-    'Household-HPROP_VAL',
     'Family-FKINDEX',
     'Household-H_LIVQRT',
     'Person-HEA',
@@ -46,10 +45,12 @@ if(!cache.ok(4)){
     'Person-A_SEX',
     'Person-NOW_COV',
     'Person-A_MARITL',
-    'Person-A_MJOCC'
+    'Person-A_MJOCC',
+    'Person-​PTOTVAL',
+    'Person-FEDTAX_AC'
   )
 
-  fields %<>% select(-c(values, mnemonic)) # these are not needed by the app. 
+  fields %<>% select(-c(values, table_field)) # these are not needed by the app. 
   fields$id = 1:nrow(fields)
     
   save.cache(fields, values, person, household, family, match_keys)

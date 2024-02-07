@@ -26,3 +26,15 @@ qsavem(
   match_keys, fields,
   file = '../app/data/appdata'
 )
+
+# save output zip.
+zipname = 'asec-clean-2019-2020'
+if(!file.exists(glue('out/{zipname}.zip'))){
+  if(!dire.exists(glue('out/{zipname}'))) dir.create(glue('out/{zipname}'))
+  w(fields, glue('out/{zipname}/fields.csv'))
+  w(family, glue('out/{zipname}/family.csv'))
+  w(household, glue('out/{zipname}/household.csv'))
+  w(person, glue('out/{zipname}/person.csv'))
+  zip(zipfile = glue('out/{zipname}'), files = glue('out/{zipname}'))
+  file.remove(list.files(glue('out/{zipname}'), full.names = TRUE))
+}
