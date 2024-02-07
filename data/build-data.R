@@ -17,7 +17,7 @@ file.remove(list.files('../app/data', full.names = TRUE))
 
 # create the folder and clear prior data. 
 if(!dir.exists('../app/data')) dir.create('../app/data')
-file.remove(list.files('../app/data', full.names = TRUE))c
+file.remove(list.files('../app/data', full.names = TRUE))
 
 # save new files, one for each column.
 for(i in names(person)) qsave(person[[i]], glue('../app/data/person-{i}'))

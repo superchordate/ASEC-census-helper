@@ -1,7 +1,7 @@
 # merge together tables to get the requested fields. 
 get_selected_data = function(){
 
-    proginc('Merge Tables')
+    proginit('Build Download')
     
     # extract tables and fields.
     if(length(last_fields_selected) == 0) return()
@@ -61,16 +61,16 @@ get_selected_data = function(){
     #names(dt) = cc(names(dt), cc('(', fmat(1-nact, '%', digits = 0), ')'), sep = ' ')
 
     # move id columns to the front. 
-    proginc('Sort')
+    proginc('Arrange Columns')
     colorder = intersect(c('H_IDNUM', 'H_SEQ', 'F_SEQ', 'PERIDNUM', 'P_SEQ', 'FILEDATE'), names(dt))
     colorder = c(colorder, setdiff(names(dt), colorder))
     dt = dt[, colorder, with = FALSE]
-    proginc()
 
     # H_SEQ is not useful in output. it changes each year. 
     dt %<>% select(-H_SEQ)
 
     # intuitive sorting. 
+    proginc('Sort')
     dt %<>% arrange_at(intersect(c('H_IDNUM', 'PERIDNUM', 'FILEDATE'), names(dt)))
     progclose()
     
@@ -82,9 +82,6 @@ get_selected_data = function(){
 # read_data reads the necessary files and saves the read data into a list to prevent re-reads.
 userdt = list()
 read_data = function(x, cols = NULL){
-        
-    proginit('Data')
-    proginc(cc('Get ', x))
 
     ox = x
     x = tolower(x)

@@ -5,8 +5,8 @@ begin()
 
 fields = readRDS('raw-data/asec-clean-2019-2020/fields.RDS')
 person = readRDS('raw-data/asec-clean-2019-2020/person.RDS')
-household = readRDS('raw-data/asec-clean-2019-2020/person.RDS')
-family = readRDS('raw-data/asec-clean-2019-2020/person.RDS')
+household = readRDS('raw-data/asec-clean-2019-2020/household.RDS')
+family = readRDS('raw-data/asec-clean-2019-2020/family.RDS')
 
 # create the folder and clear prior data. 
 if(!dir.exists('../app/data')) dir.create('../app/data')
