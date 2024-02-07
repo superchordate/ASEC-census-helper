@@ -21,7 +21,7 @@ tabs = lapply(c(
   'Choose Fields', 'Create Your Download', 'Make a Chart'
   ), function(tab) tabPanel(title = tab, uiOutput(tab))
 )
-tabs$selected = 'Create Your Download'
+tabs$selected = 'Make a Chart'
 
 ui = function(...) dashboardPage(
   dashboardHeader(title = 'ASEC Census Helper by Bryce Chamberlain'),
@@ -31,6 +31,7 @@ ui = function(...) dashboardPage(
     disable = TRUE
   ),
   dashboardBody(
+    p('Code and documentation on', tags$a(href = 'https://github.com/superchordate/ASEC-census-helper', target = '_blank', 'GitHub')),
     do.call(tabsetPanel, tabs)
   )
 )

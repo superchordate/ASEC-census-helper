@@ -1,7 +1,8 @@
 output[['Create Your Download']] = renderUI(div(
   p('Files can be very large so preview your data here. The download will include the full dataset.'),
+  p('You can also download the full, unfiltered and un-joined data', tags$a(href = 'https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip', 'here'), '(4 CSV files, 98.4 MB).'),
   actionButton('button_generatepreview', 'Generate Preview'),  
-  hidden(downloadButton('button_download_full', label = 'Download My Full Dataset')),
+  hidden(downloadButton('button_download_full', label = 'Download')),
   # div(
   #   id = 'fields_selected_download_div',
   #   class = 'tablecontainer',
@@ -36,7 +37,7 @@ output[['data_preview']] = renderReactable({
 
   selected_data %<>% filter(H_IDNUM %in% sample_H_IDNUM)
 
-  reactable(data = selected_data, searchable = TRUE)
+  reactable(data = selected_data, searchable = TRUE, pagination = FALSE)
 
 })
 
@@ -50,7 +51,8 @@ output[['fields_selected_download']] = renderReactable({
 
   reactable(
     data = fields %>% filter(id %in% last_fields_selected) %>% fields_cleanfordisplay(),
-    searchable = TRUE
+    searchable = TRUE,
+    pagination = FALSE
   )
 
 })

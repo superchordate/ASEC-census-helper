@@ -9,3 +9,4 @@
 .tablecontainer {
     display: table-cell; width: calc(100% - 190px); background-color: white; padding: 10px; padding-top: 15px;
 }
+.Reactable { padding: 5px; }

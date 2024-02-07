@@ -10,7 +10,8 @@ output[['fields_available']] = renderReactable({
     reactable(
       selection = "multiple",
       onClick = "select",
-      searchable = TRUE
+      searchable = TRUE,
+      pagination = FALSE
     )
 
 })

@@ -5,7 +5,8 @@ output[['fields_selected']] = renderReactable({
     data = fields %>% filter(id %in% last_fields_selected) %>% fields_cleanfordisplay(),
     selection = "multiple",
     onClick = "select",
-    searchable = TRUE
+    searchable = TRUE,
+    pagination = FALSE
   )
 })
 

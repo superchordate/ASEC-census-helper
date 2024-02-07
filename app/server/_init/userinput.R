@@ -23,9 +23,10 @@ userinput = list(
         if(is.null(input_type_forid)) stop(glue('userinput: input not found for id [{id}]'))
         return(input_type_forid)
     },
-    update_choices = function(id, choices){
+    update_choices = function(id, choices, selected = NULL){
         updateSelectizeInput(
-            inputId = id, choices = choices, selected = intersect(isolate(input[[id]]), choices)
+            inputId = id, choices = choices, 
+            selected = if(is.null(selected)){ intersect(isolate(input[[id]]), choices) } else { selected }
         )
     },
 
