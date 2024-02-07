@@ -11,7 +11,12 @@ output[['fields_available']] = renderReactable({
       selection = "multiple",
       onClick = "select",
       searchable = TRUE,
-      pagination = FALSE
+      pagination = FALSE,
+      columns = list(
+        # https://glin.github.io/reactable/reference/colFormat.html
+        Complete = colDef(format = colFormat(percent = TRUE, digits = 0)),
+        `Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
+      )
     )
 
 })

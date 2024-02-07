@@ -2,7 +2,8 @@ value_swaps = c(
     field = 'Field ID',
     sample = 'Sample of Values',
     desc = 'Description',
-    recordtype = 'Table'
+    recordtype = 'Table',
+    num_values = 'Distinct Values'
 )
 
 clean_names = function(x){

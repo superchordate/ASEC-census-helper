@@ -40,7 +40,12 @@ output[['fields_selected_download']] = renderReactable({
   reactable(
     data = fields %>% filter(id %in% last_fields_selected) %>% fields_cleanfordisplay(),
     searchable = TRUE,
-    pagination = FALSE
+    pagination = FALSE,
+    columns = list(
+      # https://glin.github.io/reactable/reference/colFormat.html
+      Complete = colDef(format = colFormat(percent = TRUE, digits = 0)),
+      `Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
+    )
   )
 
 })
