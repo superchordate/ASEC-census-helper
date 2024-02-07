@@ -1,8 +1,7 @@
 
 Use the live app at: https://superchordate.shinyapps.io/ASEC-census-helper.
 
-*This is still in active development. Some of the value mappings are not complete. Contributions are welcome, and check back for new features.*  
-*Data has not been updated since 2020. Contributions are invited to update to the latest data.*  
+*This is still in active development. Some of the value mappings are not complete. Contributions are welcome, and check back for new features. Data has not been updated since 2020. Contributions are invited to update to the latest data.*  
 
 # ASEC Census Helper
 
@@ -12,14 +11,14 @@ From [health.gov](https://health.gov/healthypeople/objectives-and-data/data-sour
 
 As you can imagine, this is a very powerful and comprehensive dataset that can support all kinds of research. 
 
-Unfortunately though, it is very difficult to use. For example, here are some issues that this project seeks to address:
+Unfortunately though, it is very difficult to use. Here are some issues that this project seeks to address:
 
 * Different years are in different files.
-* Over 700 fields, making files unweildy.
+* It is difficult to find the field you need: there are over 700 of them!
 * Field names are often not intuitive and must be paired with data dictionaries for comprehension. 
-* Values are keys that must be mapped to values for comprehension. For example, instead of Male or Female you'll see numbers like 1 and 2.
+* Many values are keys that must be mapped for comprehension. For example, instead of Male or Female you'll see numbers like 1 and 2.
 
-This project packages up this data for easier use. 
+This project packages up this data for easier use and provides an interface to more quickly get the data you need. 
 
 Here are some links if you'd like to learn more:
 
@@ -47,7 +46,7 @@ There is a risk of double-counting metrics when mixing Household/Family characte
 
 **How is the Data Prepared?**
 
-See `data/scripts`. We use caching from `easyr` to avoid re-running steps unnecessarily. Each column is split to a distinct file so that scripts only need to read data that has been requested by the user. 
+See `data/scripts`. Each column is split to a distinct file so that scripts only need to read data that has been requested by the user. 
 
 See `app/server/2-download/data.R` to review how the app prepares each specific download. 
 
@@ -57,7 +56,7 @@ This project is licensed under GNU v3. See LICENSE file for more info.
 
 **Get Involved**
 
-I'm not an expert in the ASEC data, so please reach out to me if you'd like enhancements or fixes to this application. If you use this data frequently, I'd love to collaborate with your team!  
+I'm not an expert in the ASEC data, so please reach out to me if you'd like enhancements or fixes. If you use this data frequently, I'd love to collaborate with your team!  
 
 I am an independent contractor. Please reach out to me if you would like some help building a custom cloud app or leveraging data science, visual analytics, or AI in your business. 
 
