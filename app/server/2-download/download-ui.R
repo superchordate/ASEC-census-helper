@@ -1,22 +1,10 @@
 output[['Create Your Download']] = renderUI(div(
   p('Files can be very large so preview your data here. The download will include the full dataset.'),
-  p('You can also download the full, unfiltered and un-joined data', tags$a(href = 'https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip', 'here'), '(4 RDS files, 63 MB).'),
+  p('You can also download the full, unfiltered and un-joined data', tags$a(href = 'https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip', 'here'), '(4 RDS files, ~60 MB).'),
   actionButton('button_generatepreview', 'Generate Preview'),  
   hidden(downloadButton('button_download_full', label = 'Download')),
-  # div(
-  #   id = 'fields_selected_download_div',
-  #   class = 'tablecontainer',
-  #   h1('FIELDS'),
-  #   reactableOutput('fields_selected_download', height = sizes$tableheight)
-  # ),
-  # div(
-  #   id = 'data_preview_div',
-  #   class = 'tablecontainer',
-  #   h1('PREVIEW'),
-  #   reactableOutput('data_preview', height = sizes$tableheight)
-  # )
-  div(style = 'margin-top: 10px; ', reactableOutput('fields_selected_download')),
-  div(style = 'margin-top: 10px; ', reactableOutput('data_preview'))
+  div(style = 'margin-top: 10px; ', reactableOutput('fields_selected_download', height = sizes$tableheight)),
+  div(style = 'margin-top: 10px; ', reactableOutput('data_preview', height = sizes$tableheight))
 ))
 
 selected_data = NULL
@@ -54,5 +42,27 @@ output[['fields_selected_download']] = renderReactable({
     searchable = TRUE,
     pagination = FALSE
   )
+
+})
+
+
+output$button_download_full <- downloadHandler(
+  filename = function() glue('asec-census-helper-{format(Sys.Date(), format="%Y%m%d")}.zip'),
+  content = function(file) {
+
+    proginit('Download')
+
+    # zip selected fields and data
+    itempdir = tempdir()
+    filenames = list(fields = glue('{itempdir}/fields.csv'), data = glue('{itempdir}/data.csv'))
+
+    proginc('Write CSVs')
+    w(fields[last_fields_selected, ], filenames$fields)
+    w(selected_data, filenames$data)
+
+    proginc('Zip Data')
+    zip(zipfile = file, files = unlist(filenames), flags = '-r9Xj') # https://stackoverflow.com/questions/51844607/zip-files-without-including-parent-directories
+
+    file.remove(unlist(filenames))
 
 })

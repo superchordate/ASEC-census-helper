@@ -39,9 +39,7 @@ if(!file.exists(glue('out/{zipname}.zip'))){
   saveRDS(person, glue('out/{zipname}/person.RDS'))
   
   # we have to move into out/ before we zip to avoid that folder being included in the zip.
-  setwd('out/')
-  zip(zipfile = zipname, files = zipname)
-  setwd('../')
+  zip(zipfile = glue('out/{zipname}'), files = list.files(glue('out/{zipname}'), full.names = TRUE), flags = '-r9Xj') # https://stackoverflow.com/questions/51844607/zip-files-without-including-parent-directories
   
   file.remove(list.files(glue('out/{zipname}'), full.names = TRUE))
   
