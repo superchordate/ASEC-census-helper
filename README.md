@@ -1,7 +1,7 @@
 
 Use the live app at: https://superchordate.shinyapps.io/ASEC-census-helper.
 
-*Census source is in development. Some of the value mappings are not complete. Contributions are welcome. More to come!*  
+*This is still in active development. Some of the value mappings are not complete. Contributions are welcome, and check back for new features.*  
 *Data has not been updated since 2020. Contributions are invited to update to include the latest data. Otherwise, I'll updated it when I can find time.*  
 
 # ASEC Census Helper
