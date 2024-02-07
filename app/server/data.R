@@ -11,45 +11,43 @@ get_selected_data = function(){
     # starting with Person.
     dt = NULL
     if('Person' %in% selected_fields$recordtype){
-        getfields = unique(c(selected_fields$field[recordtype == 'Person'], 'PF_SEQ', 'PH_SEQ', 'FILEDATE'))
+        getfields = unique(c(selected_fields$field[selected_fields$recordtype == 'Person'], 'PF_SEQ', 'PH_SEQ', 'P_SEQ', 'PERIDNUM', 'FILEDATE'))
         dt = read_data('person', getfields)[ , getfields, with = FALSE ]
+        dt %<>% rename(H_SEQ = PH_SEQ, F_SEQ = PF_SEQ)
     }
 
     # merge Family.
     if('Family' %in% selected_fields$recordtype){
-        ifields = selected_fields$field[recordtype == 'Family']
+        ifields = selected_fields$field[selected_fields$recordtype == 'Family']
         getfields = unique(c(ifields, 'FH_SEQ', 'FFPOS', 'FILEDATE'))
         if(nanull(dt)){
             dt = read_data('family', getfields)[, getfields, with = FALSE ]
+            dt %<>% rename(H_SEQ = FH_SEQ, F_SEQ = FFPOS)
         } else {
+            joinon = c('F_SEQ' = 'FFPOS', 'H_SEQ' = 'FH_SEQ', 'FILEDATE' = 'FILEDATE')
             dt %<>%
                 jrepl(
                     read_data('family', getfields)[,getfields, with = FALSE],
-                    by = c('PF_SEQ' = 'FFPOS', 'PH_SEQ' = 'FH_SEQ', 'FILEDATE' = 'FILEDATE'),
-                    replace.cols = c(ifields, 'FH_SEQ')
+                    by = joinon,
+                    replace.cols = setdiff(getfields, joinon)
                 )
         }     
     }
 
-    # and Household.
-    if('Household' %in% tables){
-        ifields = selected_fields$field[recordtype == 'Household']
-        getfields = unique(c(ifields, 'H_SEQ', 'FILEDATE'))
-        if(nanull(dt)){
-            dt = read_data('household', getfields)[ , getfields, with = FALSE ]
-        } else {
-            if('FH_SEQ' %ni% names(dt)) dt$FH_SEQ = dt$PH_SEQ
-            dt %<>%
-                jrepl(
-                    read_data('household', getfields)[,getfields, with = FALSE],
-                    by = c('FH_SEQ' = 'H_SEQ', 'FILEDATE' = 'FILEDATE'),
-                    replace.cols = ifields
-                )
-        }     
+    # and Household. we'll always merge this to get H_IDNUM, even if no household fields are selected. 
+    ifields = selected_fields$field[selected_fields$recordtype == 'Household']
+    getfields = unique(c(ifields, 'H_SEQ', 'FILEDATE', 'H_IDNUM'))
+    if(nanull(dt)){
+        dt = read_data('household', getfields)[ , getfields, with = FALSE ]
+    } else {
+        joinon = c('H_SEQ', 'FILEDATE')
+        dt %<>%
+            jrepl(
+                read_data('household', getfields)[,getfields, with = FALSE],
+                by = joinon,
+                replace.cols = setdiff(getfields,  joinon)
+            )
     }
-    
-    # resort cols to match incoming order.
-    dt = dt[, intersect(c(selected_fields$field, match_keys), names(dt)), with = FALSE]
 
     # set names to include table.
     # names(dt)[names(dt) %in% fields] = cc(toupper(descs), ' [', tables, ']')
@@ -59,6 +57,18 @@ get_selected_data = function(){
     #dt = dt[complete.cases(dt), ]
     #names(dt) = cc(names(dt), cc('(', fmat(1-nact, '%', digits = 0), ')'), sep = ' ')
     #proginc()
+    progclose()
+
+    # move id columns to the front. 
+    colorder = intersect(c('H_IDNUM', 'H_SEQ', 'F_SEQ', 'PERIDNUM', 'P_SEQ', 'FILEDATE'), names(dt))
+    colorder = c(colorder, setdiff(names(dt), colorder))
+    dt = dt[, colorder, with = FALSE]
+
+    # H_SEQ is not useful in output. it changes each year. 
+    dt %<>% select(-H_SEQ)
+
+    # intuitive sorting. 
+    dt %<>% arrange_at(intersect(c('H_IDNUM', 'PERIDNUM', 'FILEDATE'), names(dt)))
     
     return(dt)
 

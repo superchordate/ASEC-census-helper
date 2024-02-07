@@ -1,5 +1,10 @@
 if(!cache.ok(4)){
 
+  # better date format.
+  household$FILEDATE %<>% mdy()
+  person$FILEDATE %<>% mdy()
+  family$FILEDATE %<>% mdy()
+
   # remove joining and metadata fields that we'll always use. 
   fields %<>% filter(
     field %ni% c('PF_SEQ', 'PH_SEQ', 'FILEDATE', 'FH_SEQ', 'FFPOS', 'H_SEQ'),

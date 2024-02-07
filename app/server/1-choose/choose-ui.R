@@ -1,6 +1,5 @@
 choices = list(Table = c('Household', 'Family', 'Person'), Type = c('Numeric', 'Multivalued'))
 sizes = list(inputwidth = 180, tableheight = 400)
-
 output[['Choose Fields']] = renderUI(div(
   p('Select from over 700 different data fields.'),
   div(style = 'display: table; width: 100%',

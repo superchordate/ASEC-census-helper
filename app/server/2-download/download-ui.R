@@ -1,7 +1,20 @@
 output[['Create Your Download']] = renderUI(div(
   p('Files can be very large so preview your data here. The download will include the full dataset.'),
-  actionButton('button_generatepreview', 'Generate Preview'),
-  hidden(downloadButton('button_download_full', label = 'Download Full Dataset')),
+  actionButton('button_generatepreview', 'Generate Preview'),  
+  hidden(downloadButton('button_download_full', label = 'Download My Full Dataset')),
+  # div(
+  #   id = 'fields_selected_download_div',
+  #   class = 'tablecontainer',
+  #   h1('FIELDS'),
+  #   reactableOutput('fields_selected_download', height = sizes$tableheight)
+  # ),
+  # div(
+  #   id = 'data_preview_div',
+  #   class = 'tablecontainer',
+  #   h1('PREVIEW'),
+  #   reactableOutput('data_preview', height = sizes$tableheight)
+  # )
+  div(style = 'margin-top: 10px; ', reactableOutput('fields_selected_download')),
   div(style = 'margin-top: 10px; ', reactableOutput('data_preview'))
 ))
 
@@ -16,9 +29,28 @@ output[['data_preview']] = renderReactable({
     data = data.frame(Message = 'Please select fields on the prior tab.')
   ))
 
-  show(id = 'button_download_full')
+  shinyjs::show('button_download_full')
 
-  reactable(data = selected_data %>% spl(100, seed = 606))
+  # sample ids.
+  sample_H_IDNUM = spl(selected_data$H_IDNUM, 100, seed = 606)
+
+  selected_data %<>% filter(H_IDNUM %in% sample_H_IDNUM)
+
+  reactable(data = selected_data, searchable = TRUE)
 
 })
 
+output[['fields_selected_download']] = renderReactable({
+
+  # make this reactive to the buttons. 
+  input$button_addselected
+  input$button_dropselected
+
+  if(is.null(input$button_generatepreview) || input$button_generatepreview == 0) return()
+
+  reactable(
+    data = fields %>% filter(id %in% last_fields_selected) %>% fields_cleanfordisplay(),
+    searchable = TRUE
+  )
+
+})

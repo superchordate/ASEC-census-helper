@@ -5,6 +5,7 @@ require(pdftools)
 require(data.table)
 require(stringr)
 require(qs)
+require(lubridate)
 
 begin()
 

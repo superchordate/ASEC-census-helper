@@ -9,7 +9,8 @@ output[['fields_available']] = renderReactable({
     fields_cleanfordisplay() %>%
     reactable(
       selection = "multiple",
-      onClick = "select"
+      onClick = "select",
+      searchable = TRUE
     )
 
 })

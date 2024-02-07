@@ -26,7 +26,7 @@ How to get the most out of Census Source:
 
 1. **Select Data Fields**: Click tables and fields to add the fields you need.
 2. **Preview Your Data**: Click Preview to see information about your download before taking the time to create the full file. Previews are grouped, but downloads will give you data that is not summarized.
-3. **Download Your Data**: Click Download to get your data in CSV format. The app will find your data and perform necessary joins so you get a single, ready-to-use ASEC dataset. Downloads will include relevant record keys to connect observations over time. FH_SEQ & FFPOS connect records across years, and FILEDATE is the date of the survey (MMDDYY).
+3. **Download Your Data**: Click Download to get your data in CSV format. The app will find your data and perform necessary joins so you get a single, ready-to-use ASEC dataset. Downloads will include relevant record keys to connect observations over time. H_SEQ & F_SEQ connect records across years, and FILEDATE is the date of the survey (MMDDYY).
 4. **Continue Exploring**: Plop your data into Power BI or Tableau to build your charts and tables. 
 
 *Pro Tip: **Bookmark** or **Share** the URL to select the same fields again later.* 
