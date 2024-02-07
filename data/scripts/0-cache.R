@@ -12,12 +12,15 @@ cache.init( at.path = 'cache', caches = list(
   
   list(
     name = 'fixtables',
-    depends.on = c('scripts/2c-fixtables.R')
+    depends.on = c('scripts/3-fixtables.R')
   ),
   
   list(
     name = 'finish',
-    depends.on = c('scripts/2d-replace-fips.R', 'scripts/2e-addsamples.R', 'scripts/2da-replace-occupation.R')
+    depends.on = c(
+      'scripts/4a-replace-fips.R', 'scripts/4b-addsamples.R', 'scripts/4c-replace-occupation.R', 
+      'scripts/4d-finish-fields.R'
+    )
   )
   
 ))

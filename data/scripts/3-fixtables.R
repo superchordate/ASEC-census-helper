@@ -54,6 +54,11 @@ if(!cache.ok(3)){
                 x[[icol]][ grepl('niu|NIU|Not in universe|Niu', x[[icol]]) ] <- NA
                 #x[[icol]] = gsub('niu', 'Not in universe', trimws(x[[icol]]))
             }
+
+            # consistent Yes/No.
+            test = tolower(x[[icol]])
+            if(all(test %in% c('yes', 'no', NA))) x[[icol]] = tools::toTitleCase(test)
+
         }
 
         return(x)
