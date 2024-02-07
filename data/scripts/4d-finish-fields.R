@@ -13,10 +13,12 @@ if(!cache.ok(4)){
   # add metric fields. 
   fields$complete = NA
   fields$num_values = NA
+  fields$type = NA
   for(i in 1:nrow(fields)){
     x = get(tolower(fields$recordtype[i]))[[fields$field[i]]]
     fields$complete[i] <- mean(!is.na(x))
     fields$num_values[i] <- sum(!duplicated(x))
+    fields$type[i] <- fifelse(is.numeric(x), 'Numeric', 'Multivalued')
     rm(i, x)
   }
 

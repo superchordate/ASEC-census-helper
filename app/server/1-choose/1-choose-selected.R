@@ -1,8 +1,8 @@
-last_fields_selected = c()
+last_fields_selected = fields$id[fields$default]
 
 output[['fields_selected']] = renderReactable({
   reactable(
-    data = fields[FALSE, ] %>% select(-id) %>% clean_names(),
+    data = fields %>% filter(id %in% last_fields_selected) %>% fields_cleanfordisplay(),
     selection = "multiple",
     onClick = "select",
     searchable = TRUE
@@ -21,7 +21,7 @@ observeEvent(input$button_addselected, {
 
   updateReactable(
     'fields_selected', 
-    data = fields[new_selected_fields, ] %>% select(-id) %>% clean_names()
+    data = fields[new_selected_fields, ] %>% fields_cleanfordisplay()
   )
 
   last_fields_selected <<- new_selected_fields
@@ -38,7 +38,7 @@ observeEvent(input$button_dropselected, {
 
   updateReactable(
     'fields_selected', 
-    data = fields[new_selected_fields, ] %>% select(-id) %>% clean_names()
+    data = fields[new_selected_fields, ] %>% fields_cleanfordisplay()
   )
 
   last_fields_selected <<- new_selected_fields

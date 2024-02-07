@@ -4,11 +4,32 @@
 # by default, we set the id equal to the label for simplicity.
 
 userinput = list(
+
+    # properties/tracking.
     inputs_in_app = list(),
+    input_types = c('select', 'text', 'number'),
+
+    # useful functions. 
     inline = function(...) div(style='display: inline-block; vertical-align: top; ', ...),
     reset = function(){
         #TODO
     },
+    input_type = function(id){
+        input_type_forid = NULL
+        for(i in userinput$input_types) if(id %in% userinput$inputs_in_app[[i]]){
+            input_type_forid = i
+            break
+        }
+        if(is.null(input_type_forid)) stop(glue('userinput: input not found for id [{id}]'))
+        return(input_type_forid)
+    },
+    update_choices = function(id, choices){
+        updateSelectizeInput(
+            inputId = id, choices = choices, selected = intersect(isolate(input[[id]]), choices)
+        )
+    },
+
+    # functions for including inputs in the UI.
     select = function(
         # if you want an input without a label, pass NULL label and your own id.
         label, id = label, 
@@ -23,7 +44,7 @@ userinput = list(
         selected = '', width = NULL
     ){
         userinput$inputs_in_app$text = c(userinput$inputs_in_app$text, id)
-        userinput$inline(textInput(id, label = label, value = selected, width = NULL))
+        userinput$inline(textInput(id, label = label, value = selected, width = width))
     },
     number = function(
         label, id = label, 
@@ -33,4 +54,5 @@ userinput = list(
         userinput$inputs_in_app$number = c(userinput$inputs_in_app$number, id)
         userinput$inline(numericInput(id, label = label, step = step, min = min, max = max, value = selected, width = NULL))
     }
+
 )

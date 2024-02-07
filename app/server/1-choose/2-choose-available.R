@@ -1,16 +1,15 @@
 last_fields_available = NULL
+fields_cleanfordisplay = function(x) x %>% select(-c(id, default)) %>% clean_names() 
 
 output[['fields_available']] = renderReactable({
   
   last_fields_available <<- fields$id
   
   fields %>% 
-    select(-id) %>% 
-    clean_names() %>%
+    fields_cleanfordisplay() %>%
     reactable(
       selection = "multiple",
-      onClick = "select",
-      searchable = TRUE
+      onClick = "select"
     )
 
 })
@@ -32,6 +31,9 @@ fields_available_data = reactive({
   if(length(input$Table) < 3) dt %<>% filter(recordtype %in% input$Table)    
   if(!is.null(input$Topic)) dt %<>% filter(topic %in% input$Topic)
   if(!is.null(input$Subtopic)) dt %<>% filter(subtopic %in% input$Subtopic)
+  if('Numeric' %ni% input$Type) dt %<>% filter(type != 'Numeric')
+  if('Multivalued' %ni% input$Type) dt %<>% filter(type != 'Multivalued')
+  if(isval(input$Search) && nchar(input$Search) >= 3) dt %<>% filter(id %in% sch(dt %>% select(id, field, desc, sample), input$Search, pluscols = 'id')$id)
 
   return(dt)
 
@@ -51,7 +53,7 @@ observe({
 
   updateReactable(
     'fields_available', 
-    data = dt %>% select(-id) %>% clean_names(),
+    data = dt %>% fields_cleanfordisplay(),
     selected = which(new_fields %in% prior_selected_fields)
   )
 

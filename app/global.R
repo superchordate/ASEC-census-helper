@@ -6,6 +6,7 @@ require(glue)
 require(reactable)
 require(qs)
 require(shinydashboard)
+require(shinyjs)
 
 begin()
 
