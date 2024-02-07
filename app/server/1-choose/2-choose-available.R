@@ -67,3 +67,8 @@ observe({
   last_fields_available <<- new_fields
 
 })
+
+observeEvent(input$button_clearselected, {
+  updateReactable('fields_available', selected = 0)
+})
+

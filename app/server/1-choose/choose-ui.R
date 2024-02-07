@@ -15,6 +15,7 @@ output[['Choose Fields']] = renderUI(div(
       class = 'tablecontainer',
       h1('AVAILABLE'),
       inline(style = 'position: relative; top: -7px; margin-left: 7px;', actionButton('button_addselected', 'Add Selected')),
+      inline(style = 'position: relative; top: -7px; margin-left: 7px;', actionButton('button_clearselected', 'Clear Selected')),
       reactableOutput('fields_available', height = sizes$tableheight)
     )
   ),
