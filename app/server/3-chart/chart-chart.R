@@ -6,17 +6,19 @@ output$chart = renderUI({
     )
 
     dt = data.frame(
-        x = mtcars$cyl,
-        y = mtcars$wt
+        x = mtcars$wt,
+        y = mtcars$hp,
+        z = mtcars$wt,
+        g = mtcars$cyl
     )
 
     options = list(
-        # https://www.highcharts.com/docs/chart-and-series-types/scatter-chart
-        series = list(list(
-            type = 'scatter',
-            data = dt
-        ))
-    )
+        chart = list(type = 'bubble')
+        # series = list(list(
+        #     type = 'scatter',
+        #     data = dt
+        # ))
+    ) %>% hc_addgroupedseries(data = dt, groupcol = 'g', xcol = 'x', ycol = 'y', zcol = 'z')
 
     return(hc_html('chart', options))
     

@@ -1,8 +1,8 @@
 output[['Make a Chart']] = renderUI(div(
-  div(style = 'display: table; width: 100%',
+  div(style = 'display: table; width: 100%; ',
     div(
       
-      style = 'display: table-cell; width: 190px;',
+      style = 'display: table-cell; width: 190px; vertical-align: top;',
       
       userinput$select(label = 'Chart Type', choices = c('Scatter', 'Bubble', 'Bar', 'Column', 'Heatmap'), multi = FALSE, selected = 'Scatter', width = sizes$inputwidth), br(),
       userinput$select(label = 'X Axis', id = 'xaxis', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth), br(),
@@ -19,11 +19,12 @@ output[['Make a Chart']] = renderUI(div(
       )
 
     ),
-    div(
+    div(      
+      style = 'display: table-cell; width: calc(100% - 190px);',
       uiOutput('chart')
-    ),
-    hidden(textInput('dummy_makeachart', label = NULL)) # to trigger setting defaults.
-  )
+    )
+  ),
+  hidden(textInput('dummy_makeachart', label = NULL)) # to trigger setting defaults.
 ))
 
 # set options.

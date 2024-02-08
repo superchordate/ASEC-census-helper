@@ -17,7 +17,7 @@
 #'   uiOutput('testchart')
 #' )
 #' }
-hc_use = function(hc_paths = c('highcharts', 'modules/accessibility')) lapply(
+hc_use = function(hc_paths = c('highcharts', 'modules/accessibility', 'highcharts-more')) lapply(
   hc_paths,
   function(module) htmltools::HTML(as.character(
     glue::glue('<script src="https://code.highcharts.com/{module}.js"></script>')
@@ -161,7 +161,7 @@ hc_markjs = function(string){
 #' @return options list with series' added. 
 #' @export
 #'
-hc_addgroupedseries = function(options, data, groupcol, xcol, ycol){
+hc_addgroupedseries = function(options, data, groupcol, xcol, ycol, zcol = NULL){
 
     # validation.
 
@@ -179,6 +179,7 @@ hc_addgroupedseries = function(options, data, groupcol, xcol, ycol){
     # select columns.
     data$x = data[[xcol]]
     data$y = data[[ycol]]
+    if(!is.null(zcol)) data$z = data[[zcol]] 
     data$group = data[[groupcol]]
 
     # this only works if using factors so we'll convert to factors.
@@ -200,20 +201,22 @@ hc_addgroupedseries = function(options, data, groupcol, xcol, ycol){
     categories = levels(data$x)
 
     # create each series.
-    series = list()
-    for(jdt in split(data, data$group)) series[[length(series) + 1]] <- list(
+    if('series' %ni% names(options)) options$series = list()
+    for(jdt in split(data, data$group)) options$series[[length(options$series) + 1]] <- list(
         name = as.character(jdt$group[1]),
         data = jdt %>% 
             mutate(x = as.numeric(x) - 1) %>% 
             select(-group) %>%
-            list_parse()
+            hc_dataframe_to_list()
     )
 
-    options %<>% addoption('series', series)
-    options %<>% addoption('xAxis', list(
-        type = 'categorical',
-        categories = categories
-    ))
+    if('xAxis' %ni% names(options)) options$xAxis = list()
+    options$xAxis$type = 'categorical'
+    options$xAxis$categories = categories
+
+    # enable the legend. 
+    if('legend' %ni% names(options)) options$legend = list()
+    options$legend$enabled = TRUE
 
     return(options)
 
