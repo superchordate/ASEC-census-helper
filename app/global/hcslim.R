@@ -17,7 +17,7 @@
 #'   uiOutput('testchart')
 #' )
 #' }
-hc_use = function(hc_paths = c('highcharts', 'modules/accessibility', 'highcharts-more')) lapply(
+hc_use = function(hc_paths = c('highcharts', 'modules/accessibility', 'highcharts-more', 'modules/exporting')) lapply(
   hc_paths,
   function(module) htmltools::HTML(as.character(
     glue::glue('<script src="https://code.highcharts.com/{module}.js"></script>')
