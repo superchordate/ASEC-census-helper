@@ -7,13 +7,13 @@ uihead = function(){
     )
 
     # add files from www/
-    files.www =  gsub('www/', '', list.files( 'www', full.names = TRUE, recursive = TRUE ))
-    files.css = files.www[ grepl( '[.]css$', files.www, ignore.case = TRUE ) ]
-    files.js = files.www[ grepl( '[.]js$', files.www, ignore.case = TRUE ) ]
-    for( icss in files.css ) ihead[[ length(ihead) + 1 ]] = HTML( cc( '<link rel="stylesheet" type="text/css" href="', icss, '">') )
-    for( ijs in files.js ) ihead[[ length(ihead) + 1 ]] = HTML( cc( '<script src="', ijs, '"></script>') )
+    files.www =  gsub('www/', '', list.files( 'www', full.names = TRUE, recursive = TRUE))
+    files.css = files.www[grepl('[.]css$', files.www, ignore.case = TRUE )]
+    files.js = files.www[grepl('[.]js$', files.www, ignore.case = TRUE )]
+    for(icss in files.css ) ihead[[length(ihead) + 1]] = HTML(cc('<link rel="stylesheet" type="text/css" href="', icss, '">'))
+    for(ijs in files.js) ihead[[length(ihead) + 1]] = HTML(cc('<script src="', ijs, '"></script>'))
     
-    return( ihead )
+    return(ihead)
     
 }
 
@@ -21,13 +21,14 @@ tabs = lapply(c(
   'Choose Fields', 'Create Your Download', 'Make a Chart'
   ), function(tab) tabPanel(title = tab, uiOutput(tab))
 )
-#tabs$selected = 'Create Your Download'
+tabs$selected = 'Make a Chart'
 
 ui = function(...) dashboardPage(
   dashboardHeader(title = 'ASEC Census Helper by Bryce Chamberlain'),
   dashboardSidebar(
     uihead(),
     useShinyjs(),
+    hc_use(),
     disable = TRUE
   ),
   dashboardBody(

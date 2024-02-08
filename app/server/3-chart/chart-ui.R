@@ -20,7 +20,7 @@ output[['Make a Chart']] = renderUI(div(
 
     ),
     div(
-      p('Under Construction. Please check back later')
+      uiOutput('chart')
     ),
     hidden(textInput('dummy_makeachart', label = NULL)) # to trigger setting defaults.
   )
