@@ -1,4 +1,6 @@
 if(!cache.ok(4)){
+
+  stophere
   
   # https://www.census.gov/geographies/reference-files/2018/demo/popest/2018-fips.html
   states = read.any(glue('{filesat}/fips/state-geocodes-v2018.xlsx'), first_column_name = 'Division') %>%

@@ -5,6 +5,11 @@ if(!cache.ok(4)){
   person$FILEDATE %<>% mdy()
   family$FILEDATE %<>% mdy()
 
+  # intuitive sorting. 
+  household %<>% arrange(H_IDNUM, FILEDATE)
+  person %<>% arrange(PERIDNUM, FILEDATE)
+  family %<>% arrange(FH_SEQ, FFPOS, FILEDATE)
+
   # remove joining and metadata fields that we'll always use. 
   fields %<>% filter(
     field %ni% c('PF_SEQ', 'PH_SEQ', 'FILEDATE', 'FH_SEQ', 'FFPOS', 'H_SEQ'),
@@ -35,7 +40,7 @@ if(!cache.ok(4)){
 
   # select initial defaults.
   fields$default = fields$table_field %in% c(
-    'Household-State',
+    'Household-State', 
     'Household-County',
     'Family-FKINDEX',
     'Household-H_LIVQRT',
@@ -47,7 +52,10 @@ if(!cache.ok(4)){
     'Person-A_MARITL',
     'Person-A_MJOCC',
     'Person-​PTOTVAL',
-    'Person-FEDTAX_AC'
+    # numeric
+    'Person-FEDTAX_AC',
+    'Person-A_USLHRS',
+
   )
 
   fields %<>% select(-c(values, table_field)) # these are not needed by the app. 

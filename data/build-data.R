@@ -6,6 +6,7 @@ require(data.table)
 require(stringr)
 require(qs)
 require(lubridate)
+require(zoo)
 
 begin()
 

@@ -2,17 +2,17 @@ cache.init( at.path = 'cache', caches = list(
   
   list(
     name = 'read-raw',
-    depends.on = c('scripts/1-read-raw.R','data/raw')
+    depends.on = c('scripts/1-read-raw.R','data/raw-data')
   ),
   
   list(
     name = 'dictionary-values',
-    depends.on = c('scripts/2a-data-dictionary.R', 'scripts/2b-values.R')
+    depends.on = c('scripts/2-data-dictionary.R')
   ),
   
   list(
     name = 'fixtables',
-    depends.on = c('scripts/3-fixtables.R')
+    depends.on = c('scripts/3-aggregate-clean.R')
   ),
   
   list(
