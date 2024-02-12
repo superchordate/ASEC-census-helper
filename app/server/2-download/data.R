@@ -68,10 +68,6 @@ get_selected_data = function(){
 
     # H_SEQ is not useful in output. it changes each year. 
     dt %<>% select(-H_SEQ)
-
-    # intuitive sorting. 
-    proginc('Sort')
-    dt %<>% arrange_at(intersect(c('H_IDNUM', 'PERIDNUM', 'FILEDATE'), names(dt)))
     progclose()
     
     return(dt)

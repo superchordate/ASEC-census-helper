@@ -1,5 +1,5 @@
 last_fields_available = NULL
-fields_cleanfordisplay = function(x) x %>% select(-c(id, default)) %>% clean_names() 
+fields_cleanfordisplay = function(x) x %>% select(-c(id, default)) %>% relocate(field, type) %>% clean_names() 
 
 output[['fields_available']] = renderReactable({
   
@@ -14,8 +14,8 @@ output[['fields_available']] = renderReactable({
       pagination = FALSE,
       columns = list(
         # https://glin.github.io/reactable/reference/colFormat.html
-        Complete = colDef(format = colFormat(percent = TRUE, digits = 0)),
-        `Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
+        `% Complete` = colDef(format = colFormat(percent = TRUE, digits = 0)),
+        `# Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
       )
     )
 

@@ -9,8 +9,8 @@ output[['fields_selected']] = renderReactable({
     pagination = FALSE,
     columns = list(
       # https://glin.github.io/reactable/reference/colFormat.html
-      Complete = colDef(format = colFormat(percent = TRUE, digits = 0)),
-      `Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
+      `% Complete` = colDef(format = colFormat(percent = TRUE, digits = 0)),
+      `# Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
     )
   )
 })

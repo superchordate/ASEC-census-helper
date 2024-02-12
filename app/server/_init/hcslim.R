@@ -1,87 +1,3 @@
-#' Import Highcharts Libraries
-#'
-#' @param ... Code files to import, minimally defined. For example, to import https://code.highcharts.com/highcharts.js you'd send "highcharts". To import https://code.highcharts.com/modules/accessibility.js you'd send "modules/accessibility".
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' require(shiny)
-#' ui = basicPage(
-#'   hc_use(c(
-#'     'highcharts',
-#'     'modules/exporting',
-#'     'modules/export-data',
-#'     'modules/accessibility'
-#'   )),
-#'   uiOutput('testchart')
-#' )
-#' }
-hc_use = function(hc_paths = c('highcharts', 'modules/accessibility', 'highcharts-more', 'modules/exporting')) lapply(
-  hc_paths,
-  function(module) htmltools::HTML(as.character(
-    glue::glue('<script src="https://code.highcharts.com/{module}.js"></script>')
-  ))
-)
-
-#' Built HTML for Highchart.
-#'
-#' Convers options and places the Highcharts Javascript inside a script tag. Put it inside a renderUI.
-#'
-#' @param id The HTML DOM id to use for the element and the output key to use. Must be HTML-compatible (no spaces).
-#' @param options Highcharts options for the chart. Includes data, chart type, etc.
-#' @param class "chart" in Highcharts.chart(... For Highmaps, it should be "mapChart".
-#' @param loadmapfromurl If you are using a map, this is the URL of the topo.json file. Example: 'https://code.highcharts.com/mapdata/countries/us/us-ca-all.topo.json'
-#' @param printjs Print completed JS to console for troubleshooting or pasting into jsFiddle.
-#' @param pretty Use pretty formatting when converting options to JSON.
-#'
-#' @return HTML code for calling your chart.
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#'
-#'require(shiny)
-#'require(hcslim)
-#'
-#'shinyApp(
-#'  
-#'  ui = basicPage(
-#'    usecode('highcharts'),    
-#'    uiOutput('mychart')
-#'  ),
-#'
-#'  server = function(input, output) {
-#'
-#'    output$mychart = renderUI({ 
-#'      
-#'      return(hc_html('mychart', list(
-#'
-#'        chart = list(type = 'line'),
-#'        title = list(text = 'Some Numbers'),
-#'        yAxis = list(
-#'            title = list(
-#'                text = '123456'
-#'            )
-#'        ),
-#'        series = list(
-#'          list(
-#'            name = '123',
-#'            data = c(1, 2, 3)
-#'          ),
-#'          list(
-#'            name = '456',
-#'            data = c(4, 5, 6)
-#'          )
-#'        )
-#'        
-#'      )))
-#'      
-#'    })
-#'
-#'})
-#'
-#' }
 hc_html = function(
   id, 
   options, 
@@ -97,6 +13,7 @@ hc_html = function(
 
   # if series data is a data frame, we need to convert it to a list.
   for(i in seq_along(options$series)) if(!is.vector(options$series[[i]]$data)){
+    # ycategory = is.factor(options$series[[i]]$data$y) || is.character(options$series[[i]]$data$y)
     options$series[[i]]$data <- hc_dataframe_to_list(options$series[[i]]$data)
   }
 
@@ -269,10 +186,7 @@ hc_enabletooltips = function(options){
 
 hc_dataframe_to_list = function(x){
   if(nrow(x)==0) return(list())
-  ilist = list()
-  for(i in 1:nrow(x)){
-    ilist[[i]] = list()
-    for(j in 1:ncol(x)) ilist[[i]][[j]] = x[[j]][i]
-  }
-  return(ilist)
+  dt = lapply(split(x, 1:nrow(x)), as.list)
+  names(dt) = NULL
+  return(dt)
 }

@@ -29,7 +29,9 @@ output[['data_preview']] = renderReactable({
 
 })
 
-output[['fields_selected_download']] = renderReactable({
+# we'll need this table twice so use a functions.
+output[['fields_selected_download']] = renderReactable(fields_selected_table())
+fields_selected_table = function(){
 
   # make this reactive to the buttons. 
   input$button_addselected
@@ -43,13 +45,12 @@ output[['fields_selected_download']] = renderReactable({
     pagination = FALSE,
     columns = list(
       # https://glin.github.io/reactable/reference/colFormat.html
-      Complete = colDef(format = colFormat(percent = TRUE, digits = 0)),
-      `Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
+      `% Complete` = colDef(format = colFormat(percent = TRUE, digits = 0)),
+      `# Distinct Values` = colDef(format = colFormat(prefix = '', separators = TRUE, digits = 0))
     )
   )
 
-})
-
+}
 
 output$button_download_full <- downloadHandler(
   filename = function() glue('asec-census-helper-{format(Sys.Date(), format="%Y%m%d")}.zip'),
