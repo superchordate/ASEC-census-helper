@@ -196,6 +196,6 @@ if(!cache.ok(2)){
         
     }  
 
-    save.cache(dt)
+    save.cache(dt, states, counties, csas)
   
 }

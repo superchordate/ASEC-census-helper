@@ -1,5 +1,5 @@
 if(!cache.ok(4)){
-  
+  asdfd
   # add sample values to fields
   fields$sample = 'sample'  
   for(irow in 1:nrow(fields)){
