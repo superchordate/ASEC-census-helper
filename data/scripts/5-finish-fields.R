@@ -8,7 +8,7 @@ household %<>% arrange(H_IDNUM, FILEDATE)
 person %<>% arrange(PERIDNUM, FILEDATE)
 family %<>% arrange(FH_SEQ, FFPOS, FILEDATE)
 
-# remove joining and metadata fields that we'll always use. 
+# remove joining and metadata fields that we'll always use, but in the background. 
 fields %<>% filter(
   field %ni% c('PF_SEQ', 'PH_SEQ', 'FILEDATE', 'FH_SEQ', 'FFPOS', 'H_SEQ'),
   topic %ni% 'Record Identifiers',
@@ -51,11 +51,12 @@ fields$default = fields$table_field %in% c(
   'Person-A_MJOCC',
   'Person-​PTOTVAL',
   # numeric
+  'Person-PTOTVAL',
+  'Person-STATETAX_A',
   'Person-FEDTAX_AC',
-  'Person-A_USLHRS',
-
+  'Person-A_USLHRS'
 )
 
-fields %<>% select(-c(values, table_field)) # these are not needed by the app. 
+fields %<>% select(-c(values, table_field, length, position, range, raw_dictionary, universe, year)) # these are not needed by the app. 
 fields$id = 1:nrow(fields)
 

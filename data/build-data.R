@@ -8,6 +8,7 @@ require(qs)
 require(lubridate)
 require(zoo)
 require(progress)
+require(testthat)
 
 begin()
 

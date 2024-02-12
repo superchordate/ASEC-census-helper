@@ -37,6 +37,6 @@ if(!cache.ok(4)){
   
   rm(latestyr_samples)
 
-  save.cache(fields, person, household, family)
+  save.cache(value_map, fields, person, household, family)
 
 }

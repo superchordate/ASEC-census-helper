@@ -63,6 +63,6 @@ if(!cache.ok(3)){
     household %<>% fixdt()
     family %<>% fixdt()
     
-    save.cache(states, counties, csas, fields, person, household, family)
+    save.cache(states, counties, csas, value_map, fields, person, household, family)
 
 }

@@ -11,7 +11,8 @@ if(!cache.ok(4)){
     # data has some bad characters in it. remove them. 
     mutate(CTYNAME = gsub('[^A-z0-9,&\' -]', '', CTYNAME)) %>%
     atype() %>%
-    mutate(FIPS = as.integer(paste0(pad0(STATE,2), pad0(COUNTY,3))))
+    mutate(FIPS = as.integer(paste0(pad0(STATE,2), pad0(COUNTY,3)))) %>%
+    filter(COUNTY != 0) # tehse are the states restated. 
     
   csas %<>% mutate_at(vars(CSA, CBSA), list(as.integer))
 
@@ -44,7 +45,7 @@ if(!cache.ok(4)){
       counties,
       by = c('GTCO' = 'COUNTY', 'GESTFIPS' = 'STATE'),
       replace.cols = c('County' = 'CTYNAME'),
-      #verbose = TRUE 99%
+      verbose = TRUE #TODO 41%.
     ) %>% 
     mutate(County = gsub(' County$', '', County))
 

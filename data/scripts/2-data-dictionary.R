@@ -154,6 +154,7 @@ if(!cache.ok(2)){
         grep('^0.+dollar amount', value_map$values, value = TRUE),
         grep('^0 = niu\\|1 = one', value_map$values, value = TRUE),
         grep(':', value_map$values, value = TRUE),
+        grep('0.+none\\|negative amt', value_map$values, value = TRUE),        
         grep('opcoded', value_map$values, value = TRUE) # we are ignoring topcoded for now.        
       )
       
@@ -196,6 +197,6 @@ if(!cache.ok(2)){
         
     }  
 
-    save.cache(dt, states, counties, csas)
+    save.cache(dt, states, counties, csas, value_map, fields)
   
 }
