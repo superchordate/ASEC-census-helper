@@ -16,11 +16,8 @@ cache.init( at.path = 'cache', caches = list(
   ),
   
   list(
-    name = 'finish',
-    depends.on = c(
-      'scripts/4a-replace-fips.R', 'scripts/4b-addsamples.R', 'scripts/4c-replace-occupation.R', 
-      'scripts/4d-finish-fields.R'
-    )
+    name = 'fips-samples',
+    depends.on = c('scripts/4a-replace-fips.R', 'scripts/4b-addsamples.R')
   )
   
 ))

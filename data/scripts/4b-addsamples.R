@@ -26,6 +26,9 @@ if(!cache.ok(4)){
     fields$sample[irow] <- cc(ivalues, sep = '; ')
 
     rm(ivalues, irow)
+
   }
+
+  save.cache(fields, person, household, family)
 
 }
