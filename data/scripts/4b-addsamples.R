@@ -2,6 +2,13 @@ if(!cache.ok(4)){
   
   # at this point, it'll be faster to only look at fields in the latest year. 
   fields %<>% filter(year == max(year))
+
+  # create smaller datasets to get values from. 
+  latestyr_samples = list(
+    household = household %>% filter(year == fields$year[1]) %>% spl(0.5, seed = 248),
+    family = family %>% filter(year == fields$year[1]) %>% spl(0.5, seed = 248),
+    person = person %>% filter(year == fields$year[1]) %>% spl(0.5, seed = 248)
+  )
   
   # add sample values to fields
   fields$sample = NA_character_
@@ -10,8 +17,7 @@ if(!cache.ok(4)){
     
     pb$tick()
 
-    ivalues = get(tolower(fields$recordtype[irow])) %>% 
-      filter(year == fields$year[irow]) %>% 
+    ivalues = latestyr_samples[[tolower(fields$recordtype[irow])]] %>% 
       pull(fields$field[irow]) %>%
       table() %>%
       sort() 
@@ -28,6 +34,8 @@ if(!cache.ok(4)){
     rm(ivalues, irow)
 
   }
+  
+  rm(latestyr_samples)
 
   save.cache(fields, person, household, family)
 
