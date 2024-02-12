@@ -7,6 +7,7 @@ require(stringr)
 require(qs)
 require(lubridate)
 require(zoo)
+require(progress)
 
 begin()
 
