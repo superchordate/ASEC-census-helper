@@ -45,7 +45,7 @@ if(!cache.ok(2)){
         summarize(text = cc(text, sep = ' '), .groups = 'drop') %>% 
         arrange(pg, side, y)
       
-      #  add topic.
+      # add topic.
       lines$topic = gsub('^Topic: ', '', str_extract(lines$text,'^Topic: .+'))
       lines$topic %<>% zoo::na.locf()
       lines %<>% filter(!grepl('^Topic:', text))
