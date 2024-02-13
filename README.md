@@ -2,11 +2,11 @@ Use the live app at: https://superchordate.shinyapps.io/ASEC-census-helper.
 
 ## About Me
 
-I'm an independent contractor helping companies build custom cloud apps and leverage data science, visual analytics, and AI. I offer low introductory rates, free consultation and estimates, and no minimums, so contact me today, and let's chat about how I can help!
+I'm an independent contractor helping companies build custom cloud apps and leverage data science, visual analytics, and AI. I offer low introductory rates, free consultation and estimates, and no minimums, so contact me today and let's chat about how I can help!
 
 https://www.bryce-chamberlain.com/
 
-This project displays my skill in R Shiny (see the app itself and `app/` folder) and data engineering (see `data/scripts/` folder including parsing PDFs and applying them to re-map hundreds of millions of values in just a few minutes).
+This project displays my skill in R Shiny (see the app itself and [app/ folder](https://github.com/superchordate/ASEC-census-helper/tree/main/app)) and data engineering (see [data/scripts/ folder](https://github.com/superchordate/ASEC-census-helper/tree/main/data/scripts) including [parsing PDFs](https://github.com/superchordate/ASEC-census-helper/blob/main/data/scripts/2-data-dictionary.R) and [applying them](https://github.com/superchordate/ASEC-census-helper/blob/main/data/scripts/3-aggregate-clean.R) to re-map hundreds of millions of values in just a few minutes).
 
 ## About the App
 
