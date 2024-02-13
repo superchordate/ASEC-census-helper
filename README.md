@@ -6,7 +6,7 @@ I'm an independent contractor helping companies build custom cloud apps and leve
 
 https://www.bryce-chamberlain.com/
 
-This project displays my skill in R Shiny (see the app itself and [app/ folder](https://github.com/superchordate/ASEC-census-helper/tree/main/app)) and data engineering (see [data/scripts/ folder](https://github.com/superchordate/ASEC-census-helper/tree/main/data/scripts) including [parsing PDFs](https://github.com/superchordate/ASEC-census-helper/blob/main/data/scripts/2-data-dictionary.R) and [applying them](https://github.com/superchordate/ASEC-census-helper/blob/main/data/scripts/3-aggregate-clean.R) to re-map hundreds of millions of values in just a few minutes).
+This project displays my skill in R Shiny (see the [app](https://superchordate.shinyapps.io/ASEC-census-helper) itself and [app/ folder](https://github.com/superchordate/ASEC-census-helper/tree/main/app)) and data engineering (see [data/scripts/ folder](https://github.com/superchordate/ASEC-census-helper/tree/main/data/scripts) including [parsing PDFs](https://github.com/superchordate/ASEC-census-helper/blob/main/data/scripts/2-data-dictionary.R) and [applying them](https://github.com/superchordate/ASEC-census-helper/blob/main/data/scripts/3-aggregate-clean.R) to re-map hundreds of millions of values in just a few minutes).
 
 ## About the App
 
