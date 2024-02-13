@@ -52,7 +52,7 @@ You may want to run this app locally. You can do so via these steps:
 * Run `data/build-data-fromexport.R` to build the app data files (RStudio will prompt you to install the necessary packages first).
 * Run `app/global.R` to run the app (RStudio will prompt you to install the necessary packages first).
 
-You can also build from the raw data, if you'd like to dig into the data engineering, by going to `data/scripts/1-read-raw.R` and following the comments to find the datasets, saving them in raw-data, and running `data/build-data.R`.
+You can also build from the raw data, if you'd like to dig into the data engineering, by going to `data/scripts/1-read-raw.R` and following the comments to find the datasets, saving them at `data/raw-data` and running `data/build-data.R`.
 
 ## Other Information
 
