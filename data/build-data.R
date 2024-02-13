@@ -31,7 +31,7 @@ for(i in names(family)) qsave(family[[i]], glue('../app/data/family-{i}'))
 qsavem(fields, file = '../app/data/appdata')
 
 # save output zip.
-zipname = 'asec-clean-2019-2020'
+zipname = 'asec-clean-2019-2023'
 if(!file.exists(glue('out/{zipname}.zip'))){
   
   if(!dir.exists(glue('out/{zipname}'))) dir.create(glue('out/{zipname}'))

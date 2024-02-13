@@ -1,6 +1,6 @@
 output[['Create Your Download']] = renderUI(div(
   p('Files can be large so preview your data here. The download will include the full dataset.'),
-  p('You can also download the full, unfiltered and un-joined data', tags$a(href = 'https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2020.zip', 'here'), '(4 RDS files, ~60 MB).'),
+  p('You can also download the full, unfiltered and un-joined data', tags$a(href = 'https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2023.zip', 'here'), '(4 RDS files, ~150 MB).'),
   actionButton('button_generatepreview', 'Generate Preview'),  
   hidden(downloadButton('button_download_full', label = 'Download')),
   div(style = 'margin-top: 10px; ', reactableOutput('fields_selected_download', height = sizes$tableheight)),

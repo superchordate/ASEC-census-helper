@@ -14,12 +14,12 @@ if(!cache.ok(3)){
     value_map = lapply(dt, function(x) x$value_map %>% mutate(year = x$year)) %>% rbindlist()
     
     data_extract_function = function(x, table) x[[table]] %>% 
-      select_at(fields$field[fields$recordtype == table]) %>% 
+      select_at(intersect(fields$field[fields$recordtype == table], names(.))) %>% 
       mutate(year = x$year, recordtype = table)
 
-    person = lapply(dt, data_extract_function, table = 'Person') %>% rbindlist()
-    household = lapply(dt, data_extract_function, table = 'Household') %>% rbindlist()
-    family = lapply(dt, data_extract_function, table = 'Family') %>% rbindlist()
+    person = lapply(dt, data_extract_function, table = 'Person') %>% rbindlist(fill = TRUE)
+    household = lapply(dt, data_extract_function, table = 'Household') %>% rbindlist(fill = TRUE)
+    family = lapply(dt, data_extract_function, table = 'Family') %>% rbindlist(fill = TRUE)
 
     fixdt = function(x){
       
@@ -33,6 +33,8 @@ if(!cache.ok(3)){
       x_map = x[, c('row', 'year', intersect(tomap, names(x))), with = FALSE] %>%
         melt(id.vars = c('row', 'year'), variable.name = 'field')
       
+      print(glue('{x$recordtype[1]}: {fmat(nrow(x_map))}'))
+
       # remap values. 
       # this step takes a while but I don't think there is a faster way. 
       x_map %<>% 

@@ -45,7 +45,7 @@ if(!cache.ok(4)){
       counties,
       by = c('GTCO' = 'COUNTY', 'GESTFIPS' = 'STATE'),
       replace.cols = c('County' = 'CTYNAME'),
-      verbose = TRUE #TODO 41%.
+      #verbose = TRUE #TODO 41%.
     ) %>% 
     mutate(County = gsub(' County$', '', County))
 

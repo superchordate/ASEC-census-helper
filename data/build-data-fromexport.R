@@ -3,10 +3,10 @@ require(qs)
 require(glue)
 begin()
 
-fields = readRDS('raw-data/asec-clean-2019-2020/fields.RDS')
-person = readRDS('raw-data/asec-clean-2019-2020/person.RDS')
-household = readRDS('raw-data/asec-clean-2019-2020/household.RDS')
-family = readRDS('raw-data/asec-clean-2019-2020/family.RDS')
+fields = readRDS('raw-data/asec-clean-2019-2023/fields.RDS')
+person = readRDS('raw-data/asec-clean-2019-2023/person.RDS')
+household = readRDS('raw-data/asec-clean-2019-2023/household.RDS')
+family = readRDS('raw-data/asec-clean-2019-2023/family.RDS')
 
 # create the folder and clear prior data. 
 if(!dir.exists('../app/data')) dir.create('../app/data')

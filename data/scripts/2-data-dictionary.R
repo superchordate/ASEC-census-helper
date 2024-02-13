@@ -129,6 +129,11 @@ if(!cache.ok(2)){
       # remove allocation flags. 
       fields %<>% filter(!grepl('llocation flag', desc))
 
+      if(any(duplicated(setdiff(fields$field, 'FILEDATE')))){
+        View(drows(fields, 'field'))
+        stop(glue('Found duplicated fields at year [{dt[[i]]$year}]'))
+      }
+
       # save to list.
       dt[[i]]$fields = fields
       
@@ -188,6 +193,12 @@ if(!cache.ok(2)){
       value_map$to[lowercheck %in% c('no')] <- 'No'
       value_map$to[lowercheck %in% c('none')] <- 'None'
       value_map$to = gsub('\\bHu\\b', 'HU', value_map$to)
+      
+      # I verified some mappings are duplicated, for example 2019/06_ASEC_2019-Data_Dictionary_Full.pdf FKINDEX maps "2" to two values.
+      # this is an invalid mapping, so drop them. this will results in NAs for these values. 
+      checkvals = apply(value_map[, c('field', 'from')], 1, paste, collapse = '')
+      dupcheckvals = checkvals[duplicated(checkvals)]
+      value_map = value_map[checkvals %ni% dupcheckvals, ]
 
       # save to list.
       dt[[i]]$value_map = value_map

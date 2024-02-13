@@ -4,7 +4,7 @@ if(!cache.ok(1)){
     # https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
 
     doyrs = 19:23
-    doyrs = 23 # for faster during development
+    #doyrs = 23 # for faster during development
 
     # The annual folders here come from https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.2023.html > 
     #   pick a year > scroll down and click the CSV Data File. 
