@@ -13,6 +13,7 @@ require(testthat)
 begin()
 
 filesat = 'raw-data'
+forkaggle = TRUE
 
 runfolder('scripts')
 
@@ -36,10 +37,21 @@ if(!file.exists(glue('out/{zipname}.zip'))){
   
   if(!dir.exists(glue('out/{zipname}'))) dir.create(glue('out/{zipname}'))
   
-  saveRDS(fields, glue('out/{zipname}/fields.RDS'))
-  saveRDS(family, glue('out/{zipname}/family.RDS'))
-  saveRDS(household, glue('out/{zipname}/household.RDS'))
-  saveRDS(person, glue('out/{zipname}/person.RDS'))
+  if(forkaggle){
+    
+    w(fields, glue('out/{zipname}/fields.csv'))
+    w(family, glue('out/{zipname}/family.csv'))
+    w(household, glue('out/{zipname}/household.csv'))
+    w(person, glue('out/{zipname}/person.csv'))
+    
+  } else {
+    
+    saveRDS(fields, glue('out/{zipname}/fields.RDS'))
+    saveRDS(family, glue('out/{zipname}/family.RDS'))
+    saveRDS(household, glue('out/{zipname}/household.RDS'))
+    saveRDS(person, glue('out/{zipname}/person.RDS'))
+    
+  }
   
   # we have to move into out/ before we zip to avoid that folder being included in the zip.
   zip(zipfile = glue('out/{zipname}'), files = list.files(glue('out/{zipname}'), full.names = TRUE), flags = '-r9Xj') # https://stackoverflow.com/questions/51844607/zip-files-without-including-parent-directories

@@ -8,12 +8,15 @@ household %<>% arrange(H_IDNUM, FILEDATE)
 person %<>% arrange(PERIDNUM, FILEDATE)
 family %<>% arrange(FH_SEQ, FFPOS, FILEDATE)
 
-# remove joining and metadata fields that we'll always use, but in the background. 
-fields %<>% filter(
+# many of the fields are not user-friendly, 
+#   trim to only the fields that are likely to be useful and intutive to users.
+if(!forkaggle) fields %<>% filter(
   field %ni% c('PF_SEQ', 'PH_SEQ', 'FILEDATE', 'FH_SEQ', 'FFPOS', 'H_SEQ'),
   topic %ni% 'Record Identifiers',
-  !grepl('_ID$', field),
-  !grepl('^Topcde flag for ', desc)
+  !grepl('_ID$', field), # id fields. 
+  !grepl('^Topcde flag for ', desc), # 
+  !grepl('^I_', field), # imputation flags.
+  desc != 'Allocation Flag'
 )
 
 fields = distinct(fields) %>% as.data.table()
@@ -35,6 +38,8 @@ fields %<>% arrange(desc(complete), num_values)
 fields %<>% relocate(field, desc, complete, num_values, sample)
 
 fields %<>% filter(complete > 0.05)
+
+dydpod
 
 # select initial defaults.
 fields$default = fields$table_field %in% c(

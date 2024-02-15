@@ -33,7 +33,7 @@ if(!cache.ok(3)){
       x_map = x[, c('row', 'year', intersect(tomap, names(x))), with = FALSE] %>%
         melt(id.vars = c('row', 'year'), variable.name = 'field')
       
-      print(glue('{x$recordtype[1]}: {fmat(nrow(x_map))}'))
+      print(glue('{x$recordtype[1]}: {fmat(nrow(x_map))} values to map.'))
 
       # remap values. 
       # this step takes a while but I don't think there is a faster way. 
