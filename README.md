@@ -37,11 +37,9 @@ This is version 2.0 of a personal project, so it hasn't been fully tested. Here 
 
 Here are some links if you'd like to learn more:
 
-* [About the Current Population Survey](https://www.census.gov/programs-surveys/cps/about.html)
 * [Homepage for Annual Social and Economic Supplement (ASEC) of the Current Population Survey (CPS)](https://www.census.gov/programs-surveys/saipe/guidance/model-input-data/cpsasec.html)
 * [Paper About Using ASEC](https://cps.ipums.org/cps/resources/linking/4.workingpaper16.pdf)
-* [Download raw data](https://www.census.gov/data/datasets/time-series/demo/cps/cps-asec.2020.html)
-* [Download My Full Processed Dataset](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2023.zip) (4 RDS files, ~150 MB). This data is easier to use than raw ASEC data but will require you to perform your own joins. RDS files can be read in using R or RStudio and from there can be converted to other formats. It is also possible to [read RDS into Power BI](https://www.sqlshack.com/import-data-using-r-in-power-bi/) using the `readRDS` function.
+* [Download My Full Processed Data](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2019-2023.zip) (4 RDS files, ~150 MB). This data is easier to use than raw ASEC data but will require you to perform your own joins. RDS files can be read in using R or RStudio and from there can be converted to other formats. It is also possible to [read RDS into Power BI](https://www.sqlshack.com/import-data-using-r-in-power-bi/) using the `readRDS` function.
 
 ## Installing Locally
 

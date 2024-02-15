@@ -1,31 +1,32 @@
 output[['Make a Chart']] = renderUI(div(
-  div(style = 'display: table; width: 100%; ',
-    div(
+  p(HTML('This part of the site is under construction. In the meantime, I\'d suggest importing the data into <a href="https://powerbi.microsoft.com/en-us/downloads/" target="_blank">Power BI Desktop</a> to create visualizations.'))
+  # div(style = 'display: table; width: 100%; ',
+  #   div(
       
-      style = 'display: table-cell; width: 190px; vertical-align: top;',
+  #     style = 'display: table-cell; width: 190px; vertical-align: top;',
       
-      userinput$select(label = 'Chart Type', choices = c('Scatter', 'Bubble', 'Bar', 'Column', 'Heatmap'), multi = FALSE, selected = 'Scatter', width = sizes$inputwidth), br(),
-      userinput$select(label = 'X Axis', id = 'xaxis', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth), br(),
-      userinput$select(label = 'Y Axis', id = 'yaxis', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth), br(),
+  #     userinput$select(label = 'Chart Type', choices = c('Scatter', 'Bubble', 'Bar', 'Column', 'Heatmap'), multi = FALSE, selected = 'Scatter', width = sizes$inputwidth), br(),
+  #     userinput$select(label = 'X Axis', id = 'xaxis', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth), br(),
+  #     userinput$select(label = 'Y Axis', id = 'yaxis', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth), br(),
 
-      conditionalPanel(
-        'input[["Chart Type"]] != "Heatmap"', 
-        userinput$select(label = 'Group By', id = 'groupby', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth)
-      ),
+  #     conditionalPanel(
+  #       'input[["Chart Type"]] != "Heatmap"', 
+  #       userinput$select(label = 'Group By', id = 'groupby', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth)
+  #     ),
 
-      conditionalPanel(
-        'input[["Chart Type"]] == "Bubble"', 
-        userinput$select(label = 'Z Axis', id = 'zaxis', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth)
-      )
+  #     conditionalPanel(
+  #       'input[["Chart Type"]] == "Bubble"', 
+  #       userinput$select(label = 'Z Axis', id = 'zaxis', choices = NULL, multi = FALSE, selected = NULL, width = sizes$inputwidth)
+  #     )
 
-    ),
-    div(      
-      style = 'display: table-cell; width: calc(100% - 190px);',
-      uiOutput('chart')
-    )
-  ),
-  reactableOutput('fields_selected_chart'),
-  hidden(textInput('dummy_makeachart', label = NULL)) # to trigger setting defaults.
+  #   ),
+  #   div(      
+  #     style = 'display: table-cell; width: calc(100% - 190px);',
+  #     uiOutput('chart')
+  #   )
+  # ),
+  # reactableOutput('fields_selected_chart'),
+  # hidden(textInput('dummy_makeachart', label = NULL)) # to trigger setting defaults.
 ))
 
 # set options.

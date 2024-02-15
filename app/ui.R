@@ -25,7 +25,7 @@ hc_use = function(hc_paths = c('highcharts', 'modules/accessibility', 'highchart
 )
 
 tabs = lapply(c(
-  'Choose Fields', 'Create Your Download'#, 'Make a Chart'
+  'Choose Fields', 'Create Your Download', 'Make a Chart'
   ), function(tab) tabPanel(title = tab, uiOutput(tab))
 )
 #tabs$selected = 'Make a Chart'

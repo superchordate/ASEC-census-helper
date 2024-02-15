@@ -1,4 +1,4 @@
-# parse the data dictionary PDF.
+# parse the data dictionary PDF from docs like https://www2.census.gov/programs-surveys/cps/datasets/2022/march/asec2022_ddl_pub_full.pdf into usable value maps.
 if(!cache.ok(2)){
 
     # process the PDF data dictionary into something we can use. 
