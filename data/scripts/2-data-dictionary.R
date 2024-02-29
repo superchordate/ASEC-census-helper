@@ -188,7 +188,7 @@ if(!cache.ok(2)){
 
       # value cleanup.
       lowercheck = tolower(value_map$to)
-      value_map$to[lowercheck %in% c('niu', 'not in universe', 'not in universe (non-interview)')] <- 'Not In Universe'
+      value_map$to[lowercheck %in% c('niu', 'not in universe', 'not in universe (non-interview)' 'niu (ftype 2+)')] <- 'Not In Universe'
       value_map$to[lowercheck %in% c('yes')] <- 'Yes'
       value_map$to[lowercheck %in% c('no')] <- 'No'
       value_map$to[lowercheck %in% c('none')] <- 'None'
