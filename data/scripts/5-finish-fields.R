@@ -39,8 +39,6 @@ fields %<>% relocate(field, desc, complete, num_values, sample)
 
 fields %<>% filter(complete > 0.05)
 
-dydpod
-
 # select initial defaults.
 fields$default = fields$table_field %in% c(
   'Household-State', 

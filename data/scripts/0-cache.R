@@ -2,7 +2,7 @@ cache.init( at.path = 'cache', caches = list(
   
   list(
     name = 'read-raw',
-    depends.on = c('scripts/1-read-raw.R','data/raw-data')
+    depends.on = c('scripts/1-read-raw.R', 'raw-data/')
   ),
   
   list(

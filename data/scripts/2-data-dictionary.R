@@ -159,8 +159,9 @@ if(!cache.ok(2)){
         grep('^0.+dollar amount', value_map$values, value = TRUE),
         grep('^0 = niu\\|1 = one', value_map$values, value = TRUE),
         grep(':', value_map$values, value = TRUE),
-        grep('0.+none\\|negative amt', value_map$values, value = TRUE),        
-        grep('opcoded', value_map$values, value = TRUE) # we are ignoring topcoded for now.        
+        grep('0.+none[|;].*negative amt', value_map$values, value = TRUE),
+        grep('0 = none; ?marginal rate', value_map$values, value = TRUE),
+        grep('opcoded', value_map$values, value = TRUE) # we are ignoring topcoded for now.
       )
       
       value_map %<>% 
@@ -182,13 +183,13 @@ if(!cache.ok(2)){
         mutate(from = as.character(as.numeric(from))) 
 
       # clean title case.
-      value_map$to = trimws(value_map$to)
-      value_map$to = tools::toTitleCase(tolower(value_map$to))
-      for(ival in c('To', 'And', 'Or', 'Of')) value_map$to = gsub(glue('\\b{ival}\\b'), tolower(ival), value_map$to)
+      value_map$to = str_to_title(str_trim(value_map$to))
 
       # value cleanup.
       lowercheck = tolower(value_map$to)
-      value_map$to[lowercheck %in% c('niu', 'not in universe', 'not in universe (non-interview)' 'niu (ftype 2+)')] <- 'Not In Universe'
+      value_map$to[lowercheck %in% c(
+        'niu', 'not in universe', 'not in universe (non-interview)', 'niu (ftype 2+)', 'out of universe', 'niu (under 1 year old, nonmover)'
+      )] <- 'Not In Universe'
       value_map$to[lowercheck %in% c('yes')] <- 'Yes'
       value_map$to[lowercheck %in% c('no')] <- 'No'
       value_map$to[lowercheck %in% c('none')] <- 'None'
@@ -199,6 +200,18 @@ if(!cache.ok(2)){
       checkvals = apply(value_map[, c('field', 'from')], 1, paste, collapse = '')
       dupcheckvals = checkvals[duplicated(checkvals)]
       value_map = value_map[checkvals %ni% dupcheckvals, ]
+      
+      # remove items we know we don't want to map that have caused issues in the past.
+      #manual_value_map
+      value_map %<>% filter(field %ni% c(
+        'A_DTIND', # See Appendix A for list of legal codes (TODO apply mapping from full docs)
+        'A_DTOCC', # Detailed occupation recode, See Appendix B2 for list of legal codes (TODO apply mapping from full docs)
+        'HDSTVAL', # household income - retirement distributions (is numeric)
+        'PEIOIND', # Industry, See Appendix B for list of legal codes (TODO apply mapping from full docs)
+        'WEIND', # IND. OF LONGEST JOB BY DETAILED GROUPS, See Appendix A for values. (TODO apply mapping from full docs)
+        'WEMIND', # IND. OF LONGEST JOB BY MAJOR IND. GROUPS, See Appendix A for vlaues. (TODO apply mapping from full docs)
+        'WEMOCG' # OCCUP. OF LONGEST JOB BY MAJOR GROUPS, See Appendix B for values. (TODO apply mapping from full docs)
+      ))
 
       # save to list.
       dt[[i]]$value_map = value_map
@@ -208,6 +221,6 @@ if(!cache.ok(2)){
         
     }  
 
-    save.cache(dt, states, counties, csas, value_map, fields)
+    save.cache(dt, states, counties, csas, value_map, fields, manual_value_map)
   
 }

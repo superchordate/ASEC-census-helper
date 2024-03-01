@@ -33,7 +33,18 @@ if(!cache.ok(1)){
     #   and click to download a file like "prc-csa-est2022.csv"
     #   a different file has Puerto Rico CSAs so get that too if you need it. 
     csas = read.any(glue('{filesat}/fips/csa-est2022.csv'), first_column_name = 'CSA', all_chars = TRUE)
+    
+    # manual fixes to the value mapping. 
+    # this script will output out/notmapped.csv with values that might need manual work.
+    # this reads my latest manual file, available at https://storage.googleapis.com/data-downloads-by-bryce/manual_value_map-20240229.xlsx.
+    manual_value_map = read.any(
+        glue('{filesat}/manual_value_map-20240229.xlsx'), 
+        na_strings  = c(), # keep (Missing).
+        all_chars = TRUE
+      ) %>% 
+      mutate(year = as.numeric(year)) %>%
+      distinct()
 
-    save.cache(dt, states, counties, csas)
+    save.cache(dt, states, counties, csas, manual_value_map)
 
 }
