@@ -1,5 +1,7 @@
 Use the live app at: https://superchordate.shinyapps.io/ASEC-census-helper.
 
+This dataset is also available on Kaggle at: https://www.kaggle.com/datasets/brycechamberlain/us-census-cps-asec-cleaned-2019-through-2023. 
+
 ## About Me
 
 I'm an independent contractor helping companies build custom cloud apps and leverage data science, visual analytics, and AI. I offer low introductory rates, free consultation and estimates, and no minimums, so contact me today and let's chat about how I can help!
