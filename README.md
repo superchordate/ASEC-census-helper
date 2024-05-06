@@ -1,4 +1,4 @@
-Use the live app at: https://superchordate.shinyapps.io/ASEC-census-helper.
+Use the live app at: https://rshiny-7bzbiothyq-uc.a.run.app.
 
 This dataset is also available on Kaggle at: https://www.kaggle.com/datasets/brycechamberlain/us-census-cps-asec-cleaned-2019-through-2023. 
 
