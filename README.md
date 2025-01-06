@@ -1,4 +1,4 @@
-Use the live app at: https://rshiny-7bzbiothyq-uc.a.run.app.
+Use the live app at: https://asec.brycechamberlainllc.com.
 
 This dataset is also available on Kaggle at: https://www.kaggle.com/datasets/brycechamberlain/us-census-cps-asec-cleaned-2019-through-2023. 
 
@@ -77,7 +77,7 @@ I'm not an expert in the ASEC data, so please reach out to me if you'd like enha
 * Run `build-data.R`. 
 * Update the various public datasets. 
    - https://www.kaggle.com/datasets/brycechamberlain/us-census-cps-asec-cleaned-2019-through-2023 (using `forkaggle = TRUE`).
-   - [R Shiny App](https://rshiny-7bzbiothyq-uc.a.run.app/)
+   - [R Shiny App](https://asec.brycechamberlainllc.com)
    - [RDS Files](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2020-2024-rds.zip) (using `forkaggle = FALSE`).
    - Raw data folder (TODO)
 
