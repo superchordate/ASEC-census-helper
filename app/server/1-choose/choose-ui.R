@@ -9,12 +9,17 @@ output[['Choose Fields']] = renderUI(div(
       userinput$select(label = 'Table', choices = choices$Table, multi = TRUE, selected = choices$Table, width = sizes$inputwidth),
       userinput$select(label = 'Topic', choices = NULL, multi = TRUE, selected = NULL, width = sizes$inputwidth),
       userinput$select(label = 'Subtopic', choices = NULL, multi = TRUE, width = sizes$inputwidth)
-    ),    
+    ),
     div(
       class = 'tablecontainer',
       h1('AVAILABLE'),
       inline(style = 'position: relative; top: -7px; margin-left: 7px;', actionButton('button_addselected', 'Add Selected')),
       inline(style = 'position: relative; top: -7px; margin-left: 7px;', actionButton('button_clearselected', 'Clear Selected')),
+      p(HTML('
+        Select fields here and then click "Add Selected" to move them down to the table of selected fields. A few defaults have been selected for you.<br/>
+        Streamline the options using the filters on the left.<br/>
+        Then go to the "Create Your Download" tab to download data for the fields you selected..
+      ')),
       reactableOutput('fields_available', height = sizes$tableheight)
     )
   ),
