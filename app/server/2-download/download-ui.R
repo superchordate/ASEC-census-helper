@@ -70,5 +70,6 @@ output$button_download_full <- downloadHandler(
     zip(zipfile = file, files = unlist(filenames), flags = '-r9Xj') # https://stackoverflow.com/questions/51844607/zip-files-without-including-parent-directories
 
     file.remove(unlist(filenames))
+    progclose()
 
 })

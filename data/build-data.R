@@ -12,6 +12,8 @@ require(testthat)
 
 begin()
 
+dir.create('out', showWarnings = FALSE)
+
 filesat = 'raw-data'
 forkaggle = TRUE # create output for Kaggle: pretty field names and write CSV instead of RDS.
 
