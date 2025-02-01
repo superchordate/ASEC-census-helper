@@ -49,11 +49,11 @@ Here are some links if you'd like to learn more:
 You may want to run this app locally. You can do so via these steps:
 
 * Install R and RStudio and clone this repository to your local machine.
-* Download [this data](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2020-2024-rds.zip) into `data/raw-data` and unzip with "Unzip Here" or similar. This will create folder `data/raw-data/asec-clean-2019-2023` with the necessary RDS files. 
+* Download [this data](https://storage.googleapis.com/data-downloads-by-bryce/asec-clean-2020-2024-rds.zip) into `data/.data` and unzip with "Unzip Here" or similar. This will create folder `data/.data/asec-clean-2019-2023` with the necessary RDS files. 
 * Run `data/build-data-fromexport.R` to build the app data files (RStudio will prompt you to install the necessary packages first).
 * Run `app/global.R` to run the app (RStudio will prompt you to install the necessary packages first).
 
-You can also build from the raw data, if you'd like to dig into the data engineering, by going to `data/scripts/1-read-raw.R` and following the comments to find the datasets, saving them at `data/raw-data` and running `data/build-data.R`.
+You can also build from the raw data, if you'd like to dig into the data engineering, by going to `data/scripts/1-read-raw.R` and following the comments to find the datasets, saving them at `data/.data` and running `data/build-data.R`.
 
 ## Other Information
 

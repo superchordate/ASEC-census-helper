@@ -5,10 +5,10 @@ require(htmltools)
 begin()
 
 # read raw data.
-person = fread('data/out/asec-clean-2019-2023/person.csv')
-household = fread('data/out/asec-clean-2019-2023/household.csv')
-family = fread('data/out/asec-clean-2019-2023/family.csv')
-fields = fread('data/out/asec-clean-2019-2023/fields.csv')
+person = fread('data/.outputasec-clean-2019-2023/person.csv')
+household = fread('data/.outputasec-clean-2019-2023/household.csv')
+family = fread('data/.outputasec-clean-2019-2023/family.csv')
+fields = fread('data/.outputasec-clean-2019-2023/fields.csv')
 
 # filter to one person's data.
 set.seed(544)

@@ -1,4 +1,4 @@
-cache.init( at.path = 'cache', caches = list( 
+cache.init( at.path = '.cache', caches = list( 
   
   list(
     name = 'read-raw',
