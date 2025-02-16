@@ -6,7 +6,7 @@ This dataset is also available on Kaggle at: https://www.kaggle.com/datasets/bry
 
 I'm an independent contractor providing flexible end-to-end analytics support for startups and small teams. I offer low introductory rates, free consultation and estimates, and no minimums, so contact me today and let's chat about how I can help!
 
-https://www.brycechamberlainllc.com
+https://www.techbybryce.com
 
 This project demos my skill in R Shiny and data engineering using R (I'm also proficient in Python). 
 
